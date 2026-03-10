@@ -1,5 +1,6 @@
 ﻿/* ==========================================
- * AJUSTES: FONTE MAIS FINA + LOGO ESPAÇADA
+ * HEADER - LINHAGRO
+ * Atualizado: 18/01/2026
  * ========================================== */
 
 /* Importar fonte leve (Poppins ou Inter Light) */
@@ -12,6 +13,13 @@
   top: 0;
   z-index: 1000;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* estado escondido quando rola pra baixo */
+.header.header-hidden {
+  transform: translateY(-100%);
+  box-shadow: none;
 }
 
 .navbar {
@@ -21,17 +29,15 @@
   padding: 0.75rem 2rem;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 2.5rem;  /* ✅ AUMENTADO de 1.5rem para 2.5rem */
+  gap: 2.5rem;  /* AUMENTADO de 1.5rem para 2.5rem */
 }
 
-/* ==========================================
- * LOGO COM MAIS ESPAÇO
- * ========================================== */
+/* LOGO COM MAIS ESPAÇO */
 .logo {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  margin-right: 1.5rem;  /* ✅ ADICIONADO espaço extra à direita */
+  margin-right: 1.5rem;  /* Espaço extra à direita */
 }
 
 .logo-img {
@@ -40,9 +46,7 @@
   object-fit: contain;
 }
 
-/* ==========================================
- * MENU - FONTE MAIS FINA
- * ========================================== */
+/* MENU - FONTE MAIS FINA */
 .nav-menu {
   display: flex;
   gap: 0.5rem;
@@ -54,13 +58,13 @@
 .nav-link {
   text-decoration: none;
   color: #333;
-  font-weight: 300;  /* ✅ MAIS FINO: 500 → 300 */
+  font-weight: 300;  /* Mais fino: 500 → 300 */
   font-size: 15px;
   padding: 0.6rem 1rem;
   transition: color 0.3s ease;
   white-space: nowrap;
   position: relative;
-  letter-spacing: 0.3px;  /* ✅ Espaçamento entre letras */
+  letter-spacing: 0.3px;  /* Espaçamento entre letras */
 }
 
 .nav-link::after {
@@ -78,7 +82,7 @@
 
 .nav-link:hover {
   color: #F4A261;
-  font-weight: 400;  /* ✅ Fica um pouco mais forte no hover */
+  font-weight: 400;  /* Fica um pouco mais forte no hover */
 }
 
 .nav-link:hover::after {
@@ -87,16 +91,14 @@
 
 .nav-link.active {
   color: #F4A261;
-  font-weight: 500;  /* ✅ Active um pouco mais forte */
+  font-weight: 500;  /* Active um pouco mais forte */
 }
 
 .nav-link.active::after {
   transform: translateX(-50%) scaleX(1);
 }
 
-/* ==========================================
- * BOTÕES
- * ========================================== */
+/* BOTÕES */
 .nav-actions {
   display: flex;
   gap: 0.75rem;
@@ -108,7 +110,7 @@
   padding: 0.65rem 1.5rem;
   border-radius: 999px;
   text-decoration: none;
-  font-weight: 500;  /* ✅ Botões um pouco mais fortes */
+  font-weight: 500;  /* Botões um pouco mais fortes */
   font-size: 14px;
   transition: all 0.3s ease;
   display: inline-flex;
@@ -198,10 +200,7 @@
   padding: 0.5rem;
 }
 
-/* ==========================================
- * RESPONSIVE
- * ========================================== */
-
+/* RESPONSIVE HEADER */
 @media (max-width: 1024px) {
   .navbar {
     gap: 1.5rem;

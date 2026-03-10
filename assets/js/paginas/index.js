@@ -1,129 +1,121 @@
 /**
- * ==========================================
- * INDEX - JAVASCRIPT FINAL
- * Typewriter com CURSOR VISÍVEL + Counter + Carousel
- * ==========================================
+ * INDEX - JS FINAL
+ * Typewriter frases + Counter + Scroll Reveal + Smooth Scroll
  */
 
 document.addEventListener('componentsLoaded', () => {
-  console.log('✅ Página Index com TODAS as animações carregada');
+  console.log('✅ Página Index carregada (hero full-screen com typewriter de frases)');
   initIndexPage();
 });
 
 function initIndexPage() {
-  initTypewriter();
-  initHeroCarousel();
+  initHeroTypewriter();
   initCounterAnimation();
   initScrollReveal();
+  initSmoothScroll();
 }
 
 /**
- * ==========================================
- * TYPEWRITER - ANIMAÇÃO DE DIGITAÇÃO COM CURSOR VISÍVEL
- * ==========================================
+ * TYPEWRITER - FRASES COMPLETAS
  */
-function initTypewriter() {
-  const element = document.getElementById('typewriter');
-  if (!element) return;
+function initHeroTypewriter() {
+  const el = document.getElementById('hero-typewriter');
+  const cursor = document.querySelector('.hero-cursor');
+  if (!el || !cursor) return;
 
-  const words = [
-    'Precisa',
-    'Exata',
-    'Pontual',
-    'Certeira',
-    'Adequada',
-    'Específica',
-    'Direcionada',
-    'Calculada',
-    'Assertiva',
-    'Eficiente',
-    'Otimizada',
-    'Ideal',
-    'Balanceada',
-    'Inteligente',
-    'Personalizada'
+  // Frases com span laranja na palavra-chave
+  const phrases = [
+    'Regeneramos o <span class="hero-highlight-laranja">solo</span>.',
+    'Multiplicamos <span class="hero-highlight-laranja">resultados</span>.',
+    'Agricultura <span class="hero-highlight-laranja">regenerativa</span> com inteligência técnica.',
+    'O futuro da <span class="hero-highlight-laranja">produtividade</span> começa no solo vivo.'
   ];
 
-  let wordIndex = 0;
+  let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  let typingSpeed = 100;
-
-  // Criar elemento do cursor
-  const cursor = document.createElement('span');
-  cursor.textContent = '|';
-  cursor.style.background = 'linear-gradient(135deg, #F4A261 0%, #E8965A 100%)';
-  cursor.style.webkitBackgroundClip = 'text';
-  cursor.style.webkitTextFillColor = 'transparent';
-  cursor.style.backgroundClip = 'text';
-  cursor.style.animation = 'blink-cursor 0.8s infinite';
-  cursor.style.marginLeft = '2px';
+  const typingSpeed = 55;       // velocidade de digitação
+  const deletingSpeed = 40;     // velocidade de apagar
+  const pauseOnComplete = 2000; // 2s com frase completa
+  const pauseBetween = 400;     // pausa entre apagar e próxima
 
   function type() {
-    const currentWord = words[wordIndex];
+    const currentPhrase = phrases[phraseIndex];
+    const plain = currentPhrase.replace(/<[^>]*>/g, ''); // texto sem tags
 
-    if (isDeleting) {
-      // Apagando
-      element.textContent = currentWord.substring(0, charIndex - 1);
-      charIndex--;
-      typingSpeed = 50;
-    } else {
-      // Digitando
-      element.textContent = currentWord.substring(0, charIndex + 1);
-      charIndex++;
-      typingSpeed = 100;
-    }
+    if (!isDeleting) {
+      // escrevendo
+      const visibleLength = charIndex;
+      const currentVisible = sliceHtmlByPlainLength(currentPhrase, visibleLength);
+      el.innerHTML = currentVisible;
 
-    // Sempre adicionar o cursor após o texto
-    if (element.nextSibling !== cursor) {
-      if (element.nextSibling) {
-        element.parentNode.replaceChild(cursor, element.nextSibling);
+      if (charIndex < plain.length) {
+        charIndex++;
+        setTimeout(type, typingSpeed);
       } else {
-        element.parentNode.appendChild(cursor);
+        // frase completa – pausa
+        setTimeout(() => {
+          isDeleting = true;
+          setTimeout(type, deletingSpeed);
+        }, pauseOnComplete);
+      }
+    } else {
+      // apagando
+      const visibleLength = charIndex;
+      const currentVisible = sliceHtmlByPlainLength(currentPhrase, visibleLength);
+      el.innerHTML = currentVisible;
+
+      if (charIndex > 0) {
+        charIndex--;
+        setTimeout(type, deletingSpeed);
+      } else {
+        // terminou de apagar – próxima frase
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(type, pauseBetween);
       }
     }
-
-    // Se terminou de digitar a palavra
-    if (!isDeleting && charIndex === currentWord.length) {
-      typingSpeed = 2000; // Pausa de 2s
-      isDeleting = true;
-    }
-
-    // Se terminou de apagar
-    if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-      typingSpeed = 500; // Pausa de 0.5s antes de digitar próxima
-    }
-
-    setTimeout(type, typingSpeed);
   }
 
-  // Adicionar CSS para animação do cursor
-  if (!document.getElementById('cursor-blink-style')) {
-    const style = document.createElement('style');
-    style.id = 'cursor-blink-style';
-    style.textContent = `
-      @keyframes blink-cursor {
-        0%, 50% { opacity: 1; }
-        51%, 100% { opacity: 0; }
+  /**
+   * Corta string com HTML com base no comprimento do texto plano (sem tags),
+   * preservando as tags.
+   */
+  function sliceHtmlByPlainLength(html, targetLength) {
+    let plainCount = 0;
+    let result = '';
+    let inTag = false;
+
+    for (let i = 0; i < html.length; i++) {
+      const char = html[i];
+      result += char;
+
+      if (char === '<') {
+        inTag = true;
+      } else if (char === '>') {
+        inTag = false;
+      } else if (!inTag) {
+        plainCount++;
+        if (plainCount >= targetLength) {
+          return result;
+        }
       }
-    `;
-    document.head.appendChild(style);
+    }
+    return result;
   }
 
-  // Inicia após 1s
-  setTimeout(type, 1000);
-  console.log('⌨️ Typewriter com cursor visível iniciado');
+  // inicia após pequeno delay
+  setTimeout(type, 700);
+  console.log('⌨️ Typewriter de frases iniciado');
 }
 
 /**
- * ==========================================
  * COUNTER - ANIMAÇÃO DE CONTAGEM
- * ==========================================
  */
 function initCounterAnimation() {
   const numeroElements = document.querySelectorAll('.numero-numero');
+
+  if (!numeroElements.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -157,19 +149,15 @@ function animateCounter(element) {
 
     let displayValue = Math.floor(current);
 
-    // Formata números grandes
     if (displayValue >= 1000) {
       displayValue = displayValue.toLocaleString('pt-BR');
     }
 
-    // Adiciona sufixo baseado no texto abaixo
-    const label = element.nextElementSibling.textContent;
-    if (label.includes('Anos')) {
+    const label = element.nextElementSibling.textContent.toLowerCase();
+    if (label.includes('anos')) {
       element.textContent = displayValue + '+';
-    } else if (label.includes('Produtores') || label.includes('Hectares')) {
+    } else if (label.includes('produtores') || label.includes('hectares')) {
       element.textContent = displayValue + '+';
-    } else if (label.includes('Satisfação')) {
-      element.textContent = displayValue + '%';
     } else {
       element.textContent = displayValue;
     }
@@ -177,145 +165,12 @@ function animateCounter(element) {
 }
 
 /**
- * ==========================================
- * HERO CAROUSEL
- * ==========================================
- */
-function initHeroCarousel() {
-  const slides = document.querySelectorAll('.hero-slide');
-  const indicators = document.querySelectorAll('.hero-indicator');
-  const prevBtn = document.querySelector('.hero-prev');
-  const nextBtn = document.querySelector('.hero-next');
-
-  if (!slides.length) return;
-
-  let currentSlide = 0;
-  let autoPlayInterval;
-  const autoPlayDelay = 5000;
-
-  function goToSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    indicators.forEach(indicator => indicator.classList.remove('active'));
-
-    slides[index].classList.add('active');
-    indicators[index].classList.add('active');
-
-    currentSlide = index;
-  }
-
-  function nextSlide() {
-    const next = (currentSlide + 1) % slides.length;
-    goToSlide(next);
-  }
-
-  function prevSlide() {
-    const prev = (currentSlide - 1 + slides.length) % slides.length;
-    goToSlide(prev);
-  }
-
-  function startAutoPlay() {
-    stopAutoPlay();
-    autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
-  }
-
-  function stopAutoPlay() {
-    if (autoPlayInterval) {
-      clearInterval(autoPlayInterval);
-    }
-  }
-
-  function resetAutoPlay() {
-    stopAutoPlay();
-    startAutoPlay();
-  }
-
-  // Event Listeners
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      resetAutoPlay();
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      resetAutoPlay();
-    });
-  }
-
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-      goToSlide(index);
-      resetAutoPlay();
-    });
-  });
-
-  // Pausa ao hover
-  const heroSection = document.querySelector('.hero');
-  if (heroSection) {
-    heroSection.addEventListener('mouseenter', stopAutoPlay);
-    heroSection.addEventListener('mouseleave', startAutoPlay);
-  }
-
-  // Pausa quando aba inativa
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      stopAutoPlay();
-    } else {
-      startAutoPlay();
-    }
-  });
-
-  // Suporte swipe mobile
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  if (heroSection) {
-    heroSection.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    heroSection.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-  }
-
-  function handleSwipe() {
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-      resetAutoPlay();
-    }
-  }
-
-  // Teclado
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      prevSlide();
-      resetAutoPlay();
-    } else if (e.key === 'ArrowRight') {
-      nextSlide();
-      resetAutoPlay();
-    }
-  });
-
-  startAutoPlay();
-  console.log('🎬 Hero Carousel inicializado');
-}
-
-/**
- * ==========================================
  * SCROLL REVEAL
- * ==========================================
  */
 function initScrollReveal() {
-  const cards = document.querySelectorAll('.destaque-card, .area-card');
+  const cards = document.querySelectorAll('.destaque-card, .area-card, .parceiro-item');
+
+  if (!cards.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
@@ -323,7 +178,7 @@ function initScrollReveal() {
         setTimeout(() => {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
-        }, index * 100);
+        }, index * 80);
       }
     });
   }, {
@@ -342,29 +197,27 @@ function initScrollReveal() {
 }
 
 /**
- * ==========================================
  * SMOOTH SCROLL
- * ==========================================
  */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    if (href !== '#') {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        const offsetTop = target.offsetTop - 80;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
       }
-    }
+    });
   });
-});
 
-console.log('🚀 Index COMPLETO carregado!');
-console.log('   ⌨️ Typewriter COM CURSOR VISÍVEL |');
-console.log('   🔢 Counter (contagem animada)');
-console.log('   🎬 Carousel (slides automáticos)');
-console.log('   ✨ Scroll Reveal (cards aparecem)');
+  console.log('🧷 Smooth Scroll configurado');
+}
+
+console.log('🚀 Index JS (hero full-screen + typewriter) carregado!');

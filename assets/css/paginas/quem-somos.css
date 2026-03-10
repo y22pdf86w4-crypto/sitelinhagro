@@ -30,83 +30,159 @@
   margin: 0 auto;
 }
 
-/* Nossa História */
+/* ==========================================
+   TIPOGRAFIA UNIFICADA
+   ========================================== */
+
+.section-title,
+.evolucao-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.historia-text .section-description,
+.evolucao-texto {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5a6c7d;
+  margin-bottom: 1rem;
+}
+
+.historia-text .section-description strong,
+.evolucao-texto strong {
+  color: #F4A261;
+  font-weight: 600;
+}
+
+/* ==========================================
+   BLOCO 1 - NOSSA ORIGEM (TEXTO + IMAGEM)
+   ========================================== */
+
 .nossa-historia {
   padding: 4rem 2rem;
   background-color: white;
 }
 
-.historia-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
+.nossa-historia .container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.historia-text .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.historia-text .section-description {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #5a6c7d;
-  margin-bottom: 1.5rem;
-}
-
-.historia-text .section-description strong {
-  color: #F4A261;
-  font-weight: 600;
+.historia-content {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  gap: 3rem;
+  align-items: center;
 }
 
 .historia-image {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.image-placeholder {
+.historia-image-wrapper {
   width: 100%;
-  max-width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, #F4A261 0%, #E76F51 100%);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  box-shadow: 0 8px 30px rgba(244, 162, 97, 0.3);
+  max-width: 720px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
 }
 
-.image-placeholder i {
-  font-size: 5rem;
-  margin-bottom: 1rem;
+.historia-foto {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-.image-placeholder p {
-  font-size: 1.5rem;
-  font-weight: 600;
+/* ==========================================
+   BLOCO 2 - LINHA DE EVOLUÇÃO (3 ETAPAS)
+   ========================================== */
+
+.visao-compromisso-section {
+  padding: 3.5rem 2rem 3.5rem;
+  background: #f3f5f7;
 }
 
-/* Missão, Visão e Valores */
+.visao-compromisso-section .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* cada etapa da evolução */
+.evolucao-etapa {
+  text-align: left;
+  padding: 0 0 2rem;
+}
+
+/* label Etapa 1 / 2 / 3 */
+.evolucao-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F4A261;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* título da etapa */
+.evolucao-titulo {
+  margin-bottom: 0.75rem;
+}
+
+/* divisor entre etapas */
+.evolucao-divisor {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  margin: 0 0 2rem;
+}
+
+/* lista dentro da etapa 2 */
+.lista-compromisso {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.lista-compromisso li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5a6c7d;
+  margin-bottom: 0.5rem;
+}
+
+.lista-compromisso li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #F4A261;
+  font-weight: 700;
+}
+
+/* ==========================================
+   MISSÃO, VISÃO E VALORES
+   ========================================== */
+
 .mvv-section {
   padding: 4rem 2rem;
   background-color: #f8f9fa;
+}
+
+.mvv-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .mvv-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .mvv-card {
@@ -185,12 +261,20 @@
   flex-shrink: 0;
 }
 
-/* Números */
+/* ==========================================
+   NÚMEROS
+   ========================================== */
+
 .numeros-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   color: white;
   text-align: center;
+}
+
+.numeros-section .container {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .numeros-section .section-title {
@@ -214,8 +298,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
 .numero-card {
@@ -251,12 +333,20 @@
   opacity: 0.9;
 }
 
-/* CTA */
+/* ==========================================
+   CTA FINAL
+   ========================================== */
+
 .cta-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #F4A261 0%, #E76F51 100%);
   text-align: center;
   color: white;
+}
+
+.cta-section .container {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .cta-title {
@@ -326,42 +416,37 @@
     font-size: 1rem;
   }
 
+  .nossa-historia {
+    padding: 3rem 1.5rem;
+  }
+
   .historia-content {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .historia-image-wrapper {
+    max-width: 100%;
   }
 
   .historia-text .section-title {
     font-size: 2rem;
   }
 
-  .historia-text .section-description {
-    font-size: 1rem;
+  .visao-compromisso-section {
+    padding: 3rem 1.5rem;
   }
 
-  .image-placeholder {
-    height: 300px;
+  .mvv-section {
+    padding: 3rem 1.5rem;
   }
 
-  .image-placeholder i {
-    font-size: 3rem;
+  .numeros-section {
+    padding: 3rem 1.5rem;
   }
 
-  .image-placeholder p {
-    font-size: 1.2rem;
-  }
-
-  .mvv-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .numeros-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .numero-valor {
-    font-size: 2.5rem;
+  .cta-section {
+    padding: 3rem 1.5rem;
   }
 
   .cta-title {
@@ -393,7 +478,7 @@
     padding: 3rem 1rem;
   }
 
-  .mvv-section {
+  .visao-compromisso-section {
     padding: 3rem 1rem;
   }
 

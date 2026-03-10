@@ -21,6 +21,9 @@ function initResultados() {
   renderizarDepoimentos();
   renderizarCases();
 
+  // Anima os números das estatísticas
+  animarEstatisticas();
+
   console.log('✅ Resultados carregados!');
 }
 
@@ -34,6 +37,54 @@ function marcarNavAtivo() {
       link.classList.add('active');
     }
   });
+}
+
+// ============================================
+// ANIMAÇÃO DAS ESTATÍSTICAS
+// ============================================
+function animarEstatisticas() {
+  const numeros = document.querySelectorAll('.stat-number');
+  if (!numeros.length) return;
+
+  const options = {
+    threshold: 0.3
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      const valorFinal = parseInt(el.getAttribute('data-valor'), 10) || 0;
+      const sufixo = el.getAttribute('data-sufixo') || '';
+      const format = el.getAttribute('data-format') || '';
+      const duracao = 1500; // ms
+      const inicioTempo = performance.now();
+
+      function atualizar(agora) {
+        const progresso = Math.min((agora - inicioTempo) / duracao, 1);
+        const valorAtual = Math.floor(valorFinal * progresso);
+
+        let texto;
+        if (format === 'k') {
+          texto = valorAtual.toLocaleString('pt-BR');
+        } else {
+          texto = valorAtual.toString();
+        }
+
+        el.textContent = texto + sufixo;
+
+        if (progresso < 1) {
+          requestAnimationFrame(atualizar);
+        }
+      }
+
+      requestAnimationFrame(atualizar);
+      obs.unobserve(el);
+    });
+  }, options);
+
+  numeros.forEach(num => observer.observe(num));
 }
 
 // ============================================
@@ -163,22 +214,26 @@ function renderizarDepoimentos() {
   const grid = document.getElementById('testimonials-grid');
   if (!grid) return;
 
-  grid.innerHTML = depoimentos.map(d => `
-    <article class="testimonial-card">
-      <i class="fas fa-quote-right quote-icon"></i>
-      <p class="testimonial-text">"${d.texto}"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">${d.inicial}</div>
-        <div class="author-info">
-          <h4>${d.autor}</h4>
-          <p>${d.cargo} • ${d.local}</p>
-          <div class="rating">
-            ${'<i class="fas fa-star"></i>'.repeat(d.rating)}
+  grid.innerHTML = depoimentos
+    .map(
+      d => `
+      <article class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="testimonial-text">"${d.texto}"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">${d.inicial}</div>
+          <div class="author-info">
+            <h4>${d.autor}</h4>
+            <p>${d.cargo} • ${d.local}</p>
+            <div class="rating">
+              ${'<i class="fas fa-star"></i>'.repeat(d.rating)}
+            </div>
           </div>
         </div>
-      </div>
-    </article>
-  `).join('');
+      </article>
+    `
+    )
+    .join('');
 }
 
 // ============================================
@@ -188,27 +243,35 @@ function renderizarCases() {
   const grid = document.getElementById('cases-grid');
   if (!grid) return;
 
-  grid.innerHTML = cases.map(c => `
-    <article class="case-card">
-      <div class="case-image">
-        <i class="fas ${c.icone}"></i>
-      </div>
-      <div class="case-content">
-        <h3 class="case-title">${c.titulo}</h3>
-        <p class="case-location">
-          <i class="fas fa-map-marker-alt"></i>
-          ${c.local}
-        </p>
-        <p class="case-description">${c.descricao}</p>
-        <div class="case-results">
-          ${c.resultados.map(r => `
-            <div class="result-item">
-              <div class="result-value">${r.valor}</div>
-              <div class="result-label">${r.label}</div>
-            </div>
-          `).join('')}
+  grid.innerHTML = cases
+    .map(
+      c => `
+      <article class="case-card">
+        <div class="case-image">
+          <i class="fas ${c.icone}"></i>
         </div>
-      </div>
-    </article>
-  `).join('');
+        <div class="case-content">
+          <h3 class="case-title">${c.titulo}</h3>
+          <p class="case-location">
+            <i class="fas fa-map-marker-alt"></i>
+            ${c.local}
+          </p>
+          <p class="case-description">${c.descricao}</p>
+          <div class="case-results">
+            ${c.resultados
+              .map(
+                r => `
+              <div class="result-item">
+                <div class="result-value">${r.valor}</div>
+                <div class="result-label">${r.label}</div>
+              </div>
+            `
+              )
+              .join('')}
+          </div>
+        </div>
+      </article>
+    `
+    )
+    .join('');
 }
