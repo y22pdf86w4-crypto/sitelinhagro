@@ -1,6 +1,6 @@
 /**
  * INDEX - JS FINAL
- * Hero slider (3 banners) + Counter + Scroll Reveal + Smooth Scroll
+ * Hero slider (3 banners) + Counter + Scroll Reveal + Smooth Scroll + WhatsApp Balão
  */
 
 document.addEventListener('componentsLoaded', () => {
@@ -13,6 +13,7 @@ function initIndexPage() {
   initCounterAnimation();
   initScrollReveal();
   initSmoothScroll();
+  initFloatingWhatsappMessage(); // <- balão do WhatsApp
 }
 
 /**
@@ -33,19 +34,11 @@ function initHeroSlider() {
 
   function showSlide(index) {
     slides.forEach((slide, i) => {
-      if (i === index) {
-        slide.classList.add('active');
-      } else {
-        slide.classList.remove('active');
-      }
+      slide.classList.toggle('active', i === index);
     });
 
     dots.forEach((dot, i) => {
-      if (i === index) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
+      dot.classList.toggle('active', i === index);
     });
 
     currentIndex = index;
@@ -73,7 +66,6 @@ function initHeroSlider() {
     }
   }
 
-  // Navegação pelos dots
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       showSlide(index);
@@ -81,7 +73,6 @@ function initHeroSlider() {
     });
   });
 
-  // Navegação pelas setas
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
       prevSlide();
@@ -211,6 +202,43 @@ function initSmoothScroll() {
   });
 
   console.log('🧷 Smooth Scroll configurado');
+}
+
+/**
+ * WhatsApp flutuante – balão aparece de vez em quando com mensagens diferentes
+ */
+function initFloatingWhatsappMessage() {
+  const messageEl = document.querySelector('.whatsapp-floating-message');
+  if (!messageEl) return;
+
+  const mensagens = [
+    'Fale com um consultor<br>especialista Linhagro',
+    'Quer melhorar a<br>produtividade da lavoura?',
+    'Tire suas dúvidas<br>pelo WhatsApp',
+    'Fale com nosso time<br>técnico agora',
+    'Vamos construir um<br>manejo mais eficiente?'
+  ];
+
+  let idx = 0;
+
+  function mostrarMensagem() {
+    const span = messageEl.querySelector('span');
+    if (!span) return;
+
+    span.innerHTML = mensagens[idx];
+    messageEl.classList.add('visible');
+
+    setTimeout(() => {
+      messageEl.classList.remove('visible');
+    }, 2500);
+
+    idx = (idx + 1) % mensagens.length;
+  }
+
+  setTimeout(mostrarMensagem, 3000);
+  setInterval(mostrarMensagem, 6000);
+
+  console.log('💬 Balão do WhatsApp inicializado');
 }
 
 console.log('🚀 Index JS (hero slider 3 banners) carregado!');

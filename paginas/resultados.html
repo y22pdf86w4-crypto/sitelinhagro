@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Veja os resultados reais de nossos clientes - Cases de sucesso e depoimentos de produtores que transformaram suas lavouras.">
+  <meta name="description" content="Veja os resultados reais de nossos clientes - Depoimentos em vídeo e como a Linhagro pode transformar sua lavoura.">
 
   <title>Resultados de Nossos Clientes - Linhagro</title>
 
@@ -38,7 +38,9 @@
     <section class="hero-page">
       <div class="container">
         <h1 class="page-title">Performance comprovada no campo</h1>
-        <p class="page-subtitle">Dados reais de áreas acompanhadas com manejo biológico e estratégia regenerativa aplicada</p>
+        <p class="page-subtitle">
+          Dados reais de áreas acompanhadas com manejo biológico e estratégia regenerativa aplicada
+        </p>
       </div>
     </section>
 
@@ -48,9 +50,6 @@
         <div class="stats-grid">
 
           <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-users"></i>
-            </div>
             <div class="stat-number" data-valor="500" data-sufixo="+">0</div>
             <div class="stat-label">Produtores Acompanhados</div>
             <p class="stat-text">
@@ -59,9 +58,6 @@
           </div>
 
           <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
             <div class="stat-number" data-valor="35" data-sufixo="%">0</div>
             <div class="stat-label">Ganho Produtivo</div>
             <p class="stat-text">
@@ -70,9 +66,6 @@
           </div>
 
           <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-map-marked-alt"></i>
-            </div>
             <div class="stat-number" data-valor="50000" data-format="k">0</div>
             <div class="stat-label">Hectares Monitorados</div>
             <p class="stat-text">
@@ -81,9 +74,6 @@
           </div>
 
           <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-award"></i>
-            </div>
             <div class="stat-number" data-valor="25" data-sufixo="+">0</div>
             <div class="stat-label">Anos de Atuação</div>
             <p class="stat-text">
@@ -95,39 +85,40 @@
       </div>
     </section>
 
-    <!-- Depoimentos -->
+    <!-- Depoimentos em Vídeo -->
     <section class="testimonials-section">
       <div class="container">
         <h2 class="section-title">O Que Dizem Nossos Clientes</h2>
-        <p class="section-subtitle">Depoimentos reais de quem confia na Linhagro</p>
+        <p class="section-subtitle">Depoimentos em vídeo de produtores que confiam na Linhagro</p>
 
-        <div class="testimonials-grid" id="testimonials-grid"></div>
+        <div class="video-testimonials-list" id="video-testimonials-list">
+          <!-- Cards gerados via JS -->
+        </div>
       </div>
     </section>
 
-    <!-- Cases de Sucesso -->
-    <section class="cases-section">
+    <!-- CTA FINAL COM TEXTO MOTIVACIONAL -->
+    <section class="cta-section" id="contato">
       <div class="container">
-        <h2 class="section-title">Cases de Sucesso</h2>
-        <p class="section-subtitle">Resultados comprovados em diferentes culturas</p>
-
-        <div class="cases-grid" id="cases-grid"></div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section">
-      <div class="container">
-        <h2 class="cta-title">Quer Resultados Como Estes?</h2>
-        <p class="cta-text">Fale com nossa equipe e descubra como podemos ajudar sua produção</p>
+        <h2 class="cta-title">
+          Com a Linhagro, sua lavoura não depende de sorte. Depende de manejo.
+        </h2>
+        <p class="cta-text">
+          Cada depoimento que você viu aqui não é apenas uma história bonita. É resultado de solo vivo, diagnóstico bem feito
+          e decisões técnicas aplicadas safra após safra.
+        </p>
+        <p class="cta-text">
+          Quando você escolhe caminhar com a Linhagro, não está comprando um produto. Está escolhendo construir um sistema produtivo
+          mais estável, mais rentável e mais preparado para o futuro.
+        </p>
+        <p class="cta-text">
+          Sua lavoura pode ser o próximo capítulo dessa história de sucesso. O próximo passo é simples: conversar com nosso time.
+        </p>
         <div class="cta-buttons">
-          <a href="https://wa.me/5527999999999" target="_blank" rel="noopener noreferrer" class="btn-cta btn-primary">
+          <a href="https://wa.me/5527999806801?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20um%20consultor%20Linhagro."
+             target="_blank" rel="noopener noreferrer" class="btn-cta btn-primary">
             <i class="fab fa-whatsapp"></i>
-            <span>Falar com Especialista</span>
-          </a>
-          <a href="produtos.html" class="btn-cta btn-secondary">
-            <i class="fas fa-flask"></i>
-            <span>Conheça os Produtos</span>
+            <span>Quero construir esse resultado</span>
           </a>
         </div>
       </div>
@@ -137,6 +128,23 @@
 
   <!-- FOOTER -->
   <div id="footer-container"></div>
+
+  <!-- BOTÃO WHATSAPP FLUTUANTE COM BALÃO -->
+  <div class="whatsapp-floating">
+    <a
+      href="https://wa.me/5527999806801?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20um%20consultor%20Linhagro."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar com a Linhagro no WhatsApp"
+      class="whatsapp-floating-button"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="whatsapp-floating-message">
+      <span>Fale com um consultor</span>
+    </div>
+  </div>
 
   <!-- SCRIPTS -->
   <script src="../assets/components-loader.js"></script>

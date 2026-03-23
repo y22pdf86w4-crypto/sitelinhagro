@@ -2,7 +2,6 @@
  * INDEX - CSS FINAL (hero slider + seções + whatsapp flutuante)
  */
 
-
 /* ==========================================
    HEADER - ESCONDER AO ROLAR + OVERLAY VERDE
    =========================================== */
@@ -32,7 +31,6 @@
   border-bottom-color: rgba(0, 0, 0, 0.35);
   box-shadow: none;
 }
-
 
 /* ==========================================
    HERO (SLIDER COM 3 BANNERS)
@@ -296,7 +294,6 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-
 /* ==========================================
    NÚMEROS RÁPIDOS – TEXTO EM DEGRADÊ
    =========================================== */
@@ -361,7 +358,6 @@
   font-weight: 500;
 }
 
-
 /* ==========================================
    SEÇÕES GERAIS
    =========================================== */
@@ -400,7 +396,6 @@
   max-width: 600px;
   margin: 0 auto;
 }
-
 
 /* ==========================================
    DESTAQUES / PILARES – FUNDO LARANJA
@@ -510,7 +505,6 @@
   background: #43a047;
 }
 
-
 /* ==========================================
    ECOSSISTEMA / EXPLORE ÁREAS – CARDS LARANJA
    =========================================== */
@@ -617,7 +611,6 @@
   transform: translateX(5px);
 }
 
-
 /* ==========================================
    PARCEIROS – CARROSSEL INFINITO
    =========================================== */
@@ -694,9 +687,8 @@
   transform: scale(1.22) translateY(-3px);
 }
 
-
 /* ==========================================
-   BOTÃO WHATSAPP FLUTUANTE
+   BOTÃO WHATSAPP FLUTUANTE + NUVEM 3 BOLHAS
    =========================================== */
 
 .whatsapp-floating {
@@ -704,9 +696,14 @@
   bottom: 20px;
   right: 20px;
   z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 6px;
 }
 
-.whatsapp-floating a {
+/* Botão redondo */
+.whatsapp-floating-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -721,12 +718,68 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.whatsapp-floating a:hover {
+.whatsapp-floating-button:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
   background-color: #1ebe5b;
 }
 
+/* Bolha maior com a mensagem */
+.whatsapp-floating-message {
+  position: relative;
+  max-width: 220px;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0d4ff 100%);
+  color: #1f2933;
+  border-radius: 18px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  text-align: left;
+  word-break: break-word;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.whatsapp-floating-message span {
+  display: block;
+}
+
+/* bolha média – encostada na nuvem, lado do botão */
+.whatsapp-floating-message::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  bottom: -6px;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0d4ff 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* bolha pequena – mais perto do botão, abaixo da média */
+.whatsapp-floating-message::before {
+  content: '';
+  position: absolute;
+  right: 12px;
+  bottom: -18px;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0d4ff 100%);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.whatsapp-floating-message.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
 /* ==========================================
    RESPONSIVIDADE
@@ -843,10 +896,15 @@
     right: 16px;
   }
 
-  .whatsapp-floating a {
+  .whatsapp-floating-button {
     width: 52px;
     height: 52px;
     font-size: 26px;
+  }
+
+  .whatsapp-floating-message {
+    max-width: 190px;
+    font-size: 12px;
   }
 }
 
@@ -857,5 +915,9 @@
 
   .numeros-grid {
     grid-template-columns: 1fr;
+  }
+
+  .whatsapp-floating-message {
+    display: none;
   }
 }

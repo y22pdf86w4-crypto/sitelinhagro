@@ -7,6 +7,7 @@
 document.addEventListener('componentsLoaded', () => {
   console.log('✅ Página Quem Somos carregada');
   initQuemSomosPage();
+  initFloatingWhatsappMessage();
 });
 
 function initQuemSomosPage() {
@@ -14,7 +15,7 @@ function initQuemSomosPage() {
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
     link.classList.remove('active');
-    if (link.getAttribute('href').includes('quem-somos')) {
+    if (link.getAttribute('href') && link.getAttribute('href').includes('quem-somos')) {
       link.classList.add('active');
     }
   });
@@ -88,4 +89,44 @@ function animateValue(element, start, end, duration) {
     }
     element.textContent = current.toLocaleString('pt-BR');
   }, stepTime);
+}
+
+/**
+ * ==========================================
+ * WHATSAPP FLUTUANTE - BALÃO ALTERNANDO
+ * ==========================================
+ */
+
+function initFloatingWhatsappMessage() {
+  const messageEl = document.querySelector('.whatsapp-floating-message');
+  if (!messageEl) return;
+
+  const mensagens = [
+    'Fale com um consultor<br>especialista Linhagro',
+    'Quer melhorar a<br>produtividade da lavoura?',
+    'Tire suas dúvidas<br>pelo WhatsApp',
+    'Fale com nosso time<br>técnico agora',
+    'Vamos construir um<br>manejo mais eficiente?'
+  ];
+
+  let idx = 0;
+
+  function mostrarMensagem() {
+    const span = messageEl.querySelector('span');
+    if (!span) return;
+
+    span.innerHTML = mensagens[idx];
+    messageEl.classList.add('visible');
+
+    setTimeout(() => {
+      messageEl.classList.remove('visible');
+    }, 2500);
+
+    idx = (idx + 1) % mensagens.length;
+  }
+
+  // primeira mensagem depois de 3s
+  setTimeout(mostrarMensagem, 3000);
+  // depois, a cada 6s
+  setInterval(mostrarMensagem, 6000);
 }

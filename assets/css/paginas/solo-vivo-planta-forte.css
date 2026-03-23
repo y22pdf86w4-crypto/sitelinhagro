@@ -1,0 +1,419 @@
+.solo-page {
+  background: #f8f9fa;
+  min-height: 100vh;
+  color: #1f2933;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* HERO */
+
+.solo-hero {
+  position: relative;
+  padding: 6rem 1.5rem 5rem;
+  background: linear-gradient(135deg, #29401a 0%, #2D5016 40%, #111827 100%);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.solo-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 154, 60, 0.25) 0, transparent 50%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.18) 0, transparent 55%);
+  pointer-events: none;
+}
+
+.solo-hero .container {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.solo-hero-content {
+  max-width: 650px;
+  position: relative;
+  z-index: 1;
+}
+
+.solo-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.solo-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.solo-hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 580px;
+  opacity: 0.96;
+  margin-bottom: 2rem;
+}
+
+.solo-hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* BOTÕES REAPROVEITANDO CTA GLOBAL */
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-cta i {
+  font-size: 1.1rem;
+}
+
+.btn-primary {
+  background: #ff5500;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.45);
+}
+
+.btn-primary:hover {
+  background: #e24c00;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 85, 0, 0.55);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* PILARES */
+
+.solo-pillars {
+  padding: 4rem 1.5rem;
+  background: #ffffff;
+}
+
+.solo-pillars .container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1f2933;
+  margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #5a6c7d;
+  line-height: 1.6;
+}
+
+.solo-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+.solo-pillar-card {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.solo-pillar-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.solo-pillar-icon-1 { background: linear-gradient(135deg, #166534, #22c55e); }
+.solo-pillar-icon-2 { background: linear-gradient(135deg, #ea580c, #f97316); }
+.solo-pillar-icon-3 { background: linear-gradient(135deg, #0369a1, #0ea5e9); }
+.solo-pillar-icon-4 { background: linear-gradient(135deg, #4f46e5, #6366f1); }
+
+.solo-pillar-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.solo-pillar-text {
+  font-size: 0.98rem;
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+/* BENEFÍCIOS */
+
+.solo-benefits {
+  padding: 4rem 1.5rem;
+  background: #f3f4f6;
+}
+
+.solo-benefits .container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.solo-benefits-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.solo-benefits-left .section-title {
+  text-align: left;
+}
+
+.solo-benefits-left .section-subtitle {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.solo-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.solo-benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.98rem;
+  color: #374151;
+}
+
+.solo-benefits-list i {
+  color: #16a34a;
+  margin-top: 0.15rem;
+}
+
+.solo-highlight-card {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 60%, #4b5563 100%);
+  color: #f9fafb;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.7);
+}
+
+.solo-highlight-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.solo-highlight-text {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  opacity: 0.96;
+  margin-bottom: 0.75rem;
+}
+
+/* CTA FINAL */
+
+.cta-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  text-align: center;
+  color: white;
+}
+
+.cta-section .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cta-text {
+  font-size: 1.02rem;
+  margin-bottom: 0.9rem;
+  opacity: 0.95;
+  line-height: 1.7;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+
+/* WHATSAPP FLUTUANTE (reuso do estilo que você já tem) */
+
+.whatsapp-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.whatsapp-floating-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25D366;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-size: 28px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.whatsapp-floating-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  background-color: #1ebe5b;
+}
+
+.whatsapp-floating-message {
+  position: relative;
+  max-width: 220px;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0d4ff 100%);
+  color: #1f2933;
+  border-radius: 18px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  text-align: left;
+  word-break: break-word;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.whatsapp-floating-message span {
+  display: block;
+}
+
+.whatsapp-floating-message.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+  .solo-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .solo-hero {
+    padding: 5rem 1.25rem 4rem;
+  }
+
+  .solo-hero-title {
+    font-size: 2rem;
+  }
+
+  .solo-hero-subtitle {
+    font-size: 0.98rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .cta-title {
+    font-size: 1.7rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-cta {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .solo-hero {
+    padding: 4rem 1rem 3rem;
+  }
+
+  .solo-hero-title {
+    font-size: 1.7rem;
+  }
+
+  .whatsapp-floating-message {
+    display: none;
+  }
+}

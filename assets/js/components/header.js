@@ -1,6 +1,6 @@
 /**
- * HEADER - FUNDO VERDE APÓS SCROLL + (opcional) esconder ao rolar
- * Usa .header, .header-overlay e .header-hidden
+ * HEADER - FUNDO VERDE APÓS SCROLL + MENU MOBILE
+ * Usa .header, .header-overlay, .header-hidden, .nav-menu.active e body.no-scroll
  */
 
 (function () {
@@ -8,6 +8,7 @@
     const header = document.querySelector('.header');
     const navMenu = document.querySelector('.nav-menu');
     const mobileToggle = document.querySelector('.mobile-toggle');
+    const body = document.body;
 
     if (!header) {
       console.warn('⚠️ header.js: .header não encontrado');
@@ -30,7 +31,7 @@
     function onScroll() {
       const currentY = window.scrollY;
 
-      // (Opcional) esconder/mostrar header conforme direção
+      // esconder/mostrar header conforme direção (opcional)
       if (Math.abs(currentY - lastScrollY) >= 5) {
         if (currentY > lastScrollY) {
           header.classList.add('header-hidden');     // rolando pra baixo
@@ -45,15 +46,19 @@
 
     // Estado inicial
     updateOverlay();
-
     window.addEventListener('scroll', onScroll);
 
-    // MENU MOBILE AQUI É OPCIONAL, JÁ TEM NO components-loader.js
-    // Mas se quiser manter, deixe só se não duplicar listeners
+    // MENU MOBILE
     if (mobileToggle && navMenu) {
       mobileToggle.addEventListener('click', () => {
         const isOpen = navMenu.classList.toggle('active');
         mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+        if (isOpen) {
+          body.classList.add('no-scroll');
+        } else {
+          body.classList.remove('no-scroll');
+        }
       });
 
       navMenu.querySelectorAll('.nav-link').forEach((link) => {
@@ -61,6 +66,7 @@
           if (navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
             mobileToggle.setAttribute('aria-expanded', 'false');
+            body.classList.remove('no-scroll');
           }
         });
       });
@@ -69,9 +75,9 @@
     console.log('📌 header.js: fundo verde após scroll + mobile menu configurados');
   }
 
-  // roda quando a página toda carrega (caso header já esteja no DOM)
+  // roda quando a página toda carrega
   window.addEventListener('load', initHeaderEffects);
 
-  // roda novamente quando o loader avisar que os componentes foram injetados
+  // roda quando o loader avisar que os componentes foram injetados
   document.addEventListener('componentsLoaded', initHeaderEffects);
 })();

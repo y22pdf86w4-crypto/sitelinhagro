@@ -2,29 +2,15 @@
 // PÁGINA RESULTADOS - LINHAGRO
 // ============================================
 
-console.log('🚀 Página Resultados iniciada');
-
-// Aguarda o carregamento do header/footer
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    initResultados();
-  }, 100);
+document.addEventListener('componentsLoaded', () => {
+  initResultados();
+  initFloatingWhatsappMessage();
 });
 
 function initResultados() {
-  console.log('✅ Inicializando resultados...');
-
-  // Marca o link ativo no menu
   marcarNavAtivo();
-
-  // Renderiza conteúdo dinâmico
-  renderizarDepoimentos();
-  renderizarCases();
-
-  // Anima os números das estatísticas
+  renderizarVideoDepoimentos();
   animarEstatisticas();
-
-  console.log('✅ Resultados carregados!');
 }
 
 // ============================================
@@ -46,10 +32,6 @@ function animarEstatisticas() {
   const numeros = document.querySelectorAll('.stat-number');
   if (!numeros.length) return;
 
-  const options = {
-    threshold: 0.3
-  };
-
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -58,7 +40,7 @@ function animarEstatisticas() {
       const valorFinal = parseInt(el.getAttribute('data-valor'), 10) || 0;
       const sufixo = el.getAttribute('data-sufixo') || '';
       const format = el.getAttribute('data-format') || '';
-      const duracao = 1500; // ms
+      const duracao = 1500;
       const inicioTempo = performance.now();
 
       function atualizar(agora) {
@@ -82,151 +64,110 @@ function animarEstatisticas() {
       requestAnimationFrame(atualizar);
       obs.unobserve(el);
     });
-  }, options);
+  }, { threshold: 0.3 });
 
   numeros.forEach(num => observer.observe(num));
 }
 
 // ============================================
-// BANCO DE DADOS - DEPOIMENTOS
+// DEPOIMENTOS EM VÍDEO - DADOS
 // ============================================
-const depoimentos = [
+const videoDepoimentos = [
   {
-    texto: "Com os produtos da Linhagro, conseguimos aumentar em 40% a produtividade do café. O suporte técnico é excepcional e sempre estão disponíveis para tirar dúvidas.",
-    autor: "João Silva",
-    cargo: "Produtor de Café",
-    local: "Espírito Santo",
-    inicial: "J",
-    rating: 5
+    nome: 'Vanderlei Ceolin',
+    inicial: 'V',
+    quote: '“Depoimento em vídeo sobre a evolução da lavoura com o manejo Linhagro.”',
+    cultura: 'Produtor de Café',
+    local: 'Espírito Santo',
+    driveId: '1RJgQl09snW7thTE1dV2RhW7i0AS-oPS2'
   },
   {
-    texto: "Utilizamos os biofertilizantes há 3 anos e os resultados são impressionantes. Solo mais saudável, plantas mais vigorosas e redução de custos com defensivos.",
-    autor: "Maria Santos",
-    cargo: "Engenheira Agrônoma",
-    local: "Minas Gerais",
-    inicial: "M",
-    rating: 5
+    nome: 'Jardeson - JMF',
+    inicial: 'J',
+    quote: '“Relato em vídeo de ganhos de produtividade com nutrição estratégica.”',
+    cultura: 'Produtor Rural',
+    local: 'Espírito Santo',
+    driveId: '1AKPvcRSYpgIl4HXNE94Z9pQWOVYGYBfU'
   },
   {
-    texto: "A qualidade dos produtos é excelente. Notamos diferença já na primeira safra. A equipe técnica é muito capacitada e sempre nos orienta da melhor forma.",
-    autor: "Carlos Oliveira",
-    cargo: "Produtor Rural",
-    local: "São Paulo",
-    inicial: "C",
-    rating: 5
+    nome: 'Jarbas',
+    inicial: 'J',
+    quote: '“Mostra como o solo vivo e bem nutrido mudou o desempenho da área.”',
+    cultura: 'Produtor Rural',
+    local: 'Espírito Santo',
+    driveId: '1RxUJA_gmv1cDCaanwLBj_YAtn_MERX9U'
   },
   {
-    texto: "Parceria de longa data com a Linhagro. Confiamos nos produtos e no atendimento. Já recomendei para vários produtores da região.",
-    autor: "Ana Costa",
-    cargo: "Produtora de Hortaliças",
-    local: "Rio de Janeiro",
-    inicial: "A",
-    rating: 5
+    nome: 'Guto',
+    inicial: 'G',
+    quote: '“Depoimento sobre adoção de soluções biológicas e manejo regenerativo.”',
+    cultura: 'Produtor Rural',
+    local: 'Espírito Santo',
+    driveId: '1gQCvNSwtVM_6cC8BC-dXOJfxiwFbjV9k'
   },
   {
-    texto: "Os condicionadores de solo transformaram nossa produção. Conseguimos recuperar áreas degradadas e aumentar significativamente a produtividade.",
-    autor: "Pedro Almeida",
-    cargo: "Fazendeiro",
-    local: "Bahia",
-    inicial: "P",
-    rating: 5
+    nome: 'Eduardo Bortolini',
+    inicial: 'E',
+    quote: '“Evolução de produtividade e mais estabilidade de safra com a Linhagro.”',
+    cultura: 'Produtor Rural',
+    local: 'Espírito Santo',
+    driveId: '15iwE6SRiZ5MdGDnqfET6r34aUEqMO6LA'
   },
   {
-    texto: "Excelente custo-benefício. Os produtos entregam o que prometem. Estamos muito satisfeitos com os resultados obtidos.",
-    autor: "Lucia Fernandes",
-    cargo: "Produtora Orgânica",
-    local: "Espírito Santo",
-    inicial: "L",
-    rating: 5
+    nome: 'Almir Gauburro',
+    inicial: 'A',
+    quote: '“Relato em vídeo sobre recuperação de áreas e construção de fertilidade.”',
+    cultura: 'Produtor Rural',
+    local: 'Espírito Santo',
+    driveId: '1ATPtsblBgY_jxM1IqKuyvt8qUpKAYGaC'
+  },
+  {
+    nome: 'Aline Malta - Três Marias',
+    inicial: 'A',
+    quote: '“Depoimento sobre salto de resultado com manejo regenerativo.”',
+    cultura: 'Produtora Rural',
+    local: 'Espírito Santo',
+    driveId: '1WKgaxL1l-2W8ACAJThH5onImhlEEpxSk'
   }
 ];
 
-// ============================================
-// BANCO DE DADOS - CASES
-// ============================================
-const cases = [
-  {
-    titulo: "Café Arábica Premium",
-    local: "Espírito Santo",
-    icone: "fa-coffee",
-    descricao: "Implementação de programa nutricional completo resultou em grãos de maior qualidade e produtividade excepcional.",
-    resultados: [
-      { valor: "+42%", label: "Produtividade" },
-      { valor: "15%", label: "Melhor Qualidade" }
-    ]
-  },
-  {
-    titulo: "Hortaliças Orgânicas",
-    local: "Minas Gerais",
-    icone: "fa-carrot",
-    descricao: "Uso de biofertilizantes e manejo sustentável garantiu certificação orgânica e aumento expressivo nas vendas.",
-    resultados: [
-      { valor: "+35%", label: "Produção" },
-      { valor: "28%", label: "Redução Custos" }
-    ]
-  },
-  {
-    titulo: "Milho Híbrido",
-    local: "São Paulo",
-    icone: "fa-seedling",
-    descricao: "Programa de nutrição balanceada com micronutrientes específicos elevou a média de sacas por hectare.",
-    resultados: [
-      { valor: "+38%", label: "Sacas/ha" },
-      { valor: "22%", label: "Lucro Líquido" }
-    ]
-  },
-  {
-    titulo: "Cana-de-Açúcar",
-    local: "Rio de Janeiro",
-    icone: "fa-leaf",
-    descricao: "Correção de solo e aplicação de condicionadores recuperou áreas improdutivas e aumentou ATR.",
-    resultados: [
-      { valor: "+31%", label: "ATR" },
-      { valor: "18%", label: "Toneladas/ha" }
-    ]
-  },
-  {
-    titulo: "Fruticultura",
-    local: "Bahia",
-    icone: "fa-apple-alt",
-    descricao: "Manejo integrado com produtos específicos melhorou calibre, coloração e vida útil pós-colheita das frutas.",
-    resultados: [
-      { valor: "+45%", label: "Frutas Tipo A" },
-      { valor: "25%", label: "Shelf Life" }
-    ]
-  },
-  {
-    titulo: "Pastagem Melhorada",
-    local: "Espírito Santo",
-    icone: "fa-cow",
-    descricao: "Recuperação de pastagens degradadas com programa de adubação e correção aumentou capacidade de suporte.",
-    resultados: [
-      { valor: "+50%", label: "Cap. Suporte" },
-      { valor: "33%", label: "Ganho Peso" }
-    ]
-  }
-];
+function getDrivePreviewUrl(id) {
+  return `https://drive.google.com/file/d/${id}/preview`;
+}
 
 // ============================================
-// RENDERIZAR DEPOIMENTOS
+// RENDERIZA OS CARDS DE VÍDEO
 // ============================================
-function renderizarDepoimentos() {
-  const grid = document.getElementById('testimonials-grid');
-  if (!grid) return;
+function renderizarVideoDepoimentos() {
+  const container = document.getElementById('video-testimonials-list');
+  if (!container) return;
 
-  grid.innerHTML = depoimentos
+  container.innerHTML = videoDepoimentos
     .map(
-      d => `
-      <article class="testimonial-card">
-        <i class="fas fa-quote-right quote-icon"></i>
-        <p class="testimonial-text">"${d.texto}"</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">${d.inicial}</div>
-          <div class="author-info">
-            <h4>${d.autor}</h4>
-            <p>${d.cargo} • ${d.local}</p>
-            <div class="rating">
-              ${'<i class="fas fa-star"></i>'.repeat(d.rating)}
+      (v, index) => `
+      <article class="video-testimonial-card">
+        <div class="video-wrapper" data-video-index="${index}">
+          <div class="video-placeholder">
+            <div class="video-placeholder-icon">
+              <i class="fas fa-play-circle"></i>
+            </div>
+            <div class="video-placeholder-text">
+              Clique para assistir ao depoimento
+            </div>
+          </div>
+        </div>
+        <div class="video-info">
+          <div>
+            <div class="video-quote-icon">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            <p class="video-quote">${v.quote}</p>
+          </div>
+          <div class="video-author-block">
+            <div class="video-avatar">${v.inicial}</div>
+            <div class="video-author-texts">
+              <span class="video-title">${v.nome}</span>
+              <span class="video-meta">${v.cultura} • ${v.local}</span>
             </div>
           </div>
         </div>
@@ -234,44 +175,79 @@ function renderizarDepoimentos() {
     `
     )
     .join('');
+
+  initLazyLoadVideos();
 }
 
 // ============================================
-// RENDERIZAR CASES
+// LAZY LOAD DOS IFRAMES (Google Drive)
 // ============================================
-function renderizarCases() {
-  const grid = document.getElementById('cases-grid');
-  if (!grid) return;
+function initLazyLoadVideos() {
+  const wrappers = document.querySelectorAll('.video-wrapper');
+  if (!wrappers.length) return;
 
-  grid.innerHTML = cases
-    .map(
-      c => `
-      <article class="case-card">
-        <div class="case-image">
-          <i class="fas ${c.icone}"></i>
-        </div>
-        <div class="case-content">
-          <h3 class="case-title">${c.titulo}</h3>
-          <p class="case-location">
-            <i class="fas fa-map-marker-alt"></i>
-            ${c.local}
-          </p>
-          <p class="case-description">${c.descricao}</p>
-          <div class="case-results">
-            ${c.resultados
-              .map(
-                r => `
-              <div class="result-item">
-                <div class="result-value">${r.valor}</div>
-                <div class="result-label">${r.label}</div>
-              </div>
-            `
-              )
-              .join('')}
-          </div>
-        </div>
-      </article>
-    `
-    )
-    .join('');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const wrapper = entry.target;
+      const index = parseInt(wrapper.getAttribute('data-video-index'), 10);
+      const data = videoDepoimentos[index];
+      if (!data) {
+        obs.unobserve(wrapper);
+        return;
+      }
+
+      const iframe = document.createElement('iframe');
+      iframe.src = getDrivePreviewUrl(data.driveId);
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.loading = 'lazy';
+
+      wrapper.innerHTML = '';
+      wrapper.appendChild(iframe);
+
+      obs.unobserve(wrapper);
+    });
+  }, { threshold: 0.3 });
+
+  wrappers.forEach(w => observer.observe(w));
+}
+
+/**
+ * ==========================================
+ * WHATSAPP FLUTUANTE - BALÃO ALTERNANDO
+ * ==========================================
+ */
+function initFloatingWhatsappMessage() {
+  const messageEl = document.querySelector('.whatsapp-floating-message');
+  if (!messageEl) return;
+
+  const mensagens = [
+    'Fale com um consultor<br>especialista Linhagro',
+    'Quer melhorar a<br>produtividade da lavoura?',
+    'Tire suas dúvidas<br>pelo WhatsApp',
+    'Fale com nosso time<br>técnico agora',
+    'Vamos construir um<br>manejo mais eficiente?'
+  ];
+
+  let idx = 0;
+
+  function mostrarMensagem() {
+    const span = messageEl.querySelector('span');
+    if (!span) return;
+
+    span.innerHTML = mensagens[idx];
+    messageEl.classList.add('visible');
+
+    setTimeout(() => {
+      messageEl.classList.remove('visible');
+    }, 2500);
+
+    idx = (idx + 1) % mensagens.length;
+  }
+
+  setTimeout(mostrarMensagem, 3000);
+  setInterval(mostrarMensagem, 6000);
 }
