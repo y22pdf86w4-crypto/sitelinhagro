@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trabalhe Conosco - Faça parte do time Linhagro e construa resultados no campo com propósito.">
+
+  <title>Trabalhe Conosco - Linhagro</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/imagens/favicon-32x32.png">
+
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variaveis.css">
+  <link rel="stylesheet" href="../assets/css/componentes.css">
+  <link rel="stylesheet" href="../assets/css/components/header.css">
+  <link rel="stylesheet" href="../assets/css/components/footer.css">
+  <link rel="stylesheet" href="../assets/css/paginas/trabalhe_conosco.css">
+  <link rel="stylesheet" href="../assets/css/cookie-banner.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div id="header-container"></div>
+
+  <main class="trabalhe-page">
+
+    <!-- Hero -->
+    <section class="hero-page">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="page-title">Trabalhe Conosco</h1>
+          <p class="page-subtitle">
+            Faça parte de um time que acredita em solo vivo, lavoura forte e relações duradouras com o produtor.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre trabalhar na Linhagro -->
+    <section class="sobre-trabalhe">
+      <div class="container sobre-grid">
+        <div class="sobre-texto">
+          <h2 class="section-title">Cresça junto com a Linhagro</h2>
+          <p class="section-paragraph">
+            Na Linhagro, você encontra um ambiente técnico, colaborativo e próximo do produtor.
+            Buscamos pessoas com atitude de dono, vontade de aprender e paixão pelo agronegócio.
+          </p>
+          <p class="section-paragraph">
+            Aqui você participa de projetos que geram resultado real no campo, com suporte de um time
+            experiente e foco em manejo sustentável, biológicos e nutrição de alta performance.
+          </p>
+          <ul class="beneficios-lista">
+            <li><i class="fas fa-check"></i> Plano de desenvolvimento e capacitações técnicas contínuas</li>
+            <li><i class="fas fa-check"></i> Ambiente colaborativo, com troca entre consultores e produtores</li>
+            <li><i class="fas fa-check"></i> Atuação direta em projetos de alto impacto no campo</li>
+          </ul>
+        </div>
+        <div class="sobre-cards">
+          <div class="area-card">
+            <h3>Área Técnica</h3>
+            <p>Engenheiros agrônomos, técnicos e consultores de campo focados em diagnóstico e manejo.</p>
+          </div>
+          <div class="area-card">
+            <h3>Comercial & Relacionamento</h3>
+            <p>Profissionais com visão de negócio e forte relacionamento com produtores e parceiros.</p>
+          </div>
+          <div class="area-card">
+            <h3>Backoffice & Suporte</h3>
+            <p>Finanças, logística, marketing e operações apoiando o crescimento da Linhagro.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulário Trabalhe Conosco -->
+    <section class="form-section">
+      <div class="container">
+        <div class="form-wrapper">
+          <div class="form-header">
+            <h2 class="section-title">Envie seu perfil</h2>
+            <p class="section-subtitle">
+              Preencha os dados abaixo para que nosso time de pessoas e cultura conheça você.
+            </p>
+          </div>
+
+<form
+  class="trabalhe-form"
+  id="trabalhe-form"
+  action="https://formspree.io/f/xaqprjaq"
+  method="POST"
+>
+            <!-- Campos ocultos Formspree -->
+            <input type="hidden" name="_subject" value="Nova candidatura - Trabalhe Conosco Linhagro">
+            <input type="hidden" name="_language" value="pt">
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nome">Nome completo*</label>
+                <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-mail*</label>
+                <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+              </div>
+
+              <div class="form-group">
+                <label for="telefone">Telefone / WhatsApp*</label>
+                <input type="tel" id="telefone" name="telefone" required placeholder="+55 (__) _____-____">
+              </div>
+
+              <div class="form-group">
+                <label for="cidade">Cidade / Estado*</label>
+                <input type="text" id="cidade" name="cidade" required placeholder="Ex.: Colatina - ES">
+              </div>
+
+              <div class="form-group full">
+                <label for="area-interesse">Área de interesse*</label>
+                <select id="area-interesse" name="area-interesse" required>
+                  <option value="">Selecione</option>
+                  <option value="tecnica">Área Técnica / Consultoria de Campo</option>
+                  <option value="comercial">Comercial / Relacionamento com Cliente</option>
+                  <option value="backoffice">Backoffice / Administrativo</option>
+                  <option value="estagio">Estágio / Trainee</option>
+                  <option value="outros">Outros</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label for="mensagem">Fale um pouco sobre sua experiência*</label>
+                <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Conte rapidamente sua trajetória, experiências no campo e por que gostaria de fazer parte da Linhagro."></textarea>
+              </div>
+
+              <div class="form-group full">
+                <label for="linkedin">LinkedIn ou outro link (opcional)</label>
+                <input type="url" id="linkedin" name="linkedin" placeholder="Link para LinkedIn, currículo online ou portfólio">
+              </div>
+            </div>
+
+            <p class="form-note">
+              Ao enviar seus dados, você concorda em receber contato da equipe Linhagro sobre oportunidades compatíveis com seu perfil.
+            </p>
+
+            <button type="submit" class="btn-cta btn-primary form-submit">
+              <i class="fas fa-paper-plane"></i>
+              <span>Enviar candidatura</span>
+            </button>
+
+            <div class="form-sucesso" id="form-sucesso" style="display:none;">
+              <i class="fas fa-check-circle"></i>
+              <p>Recebemos seus dados com sucesso. Nosso time de pessoas e cultura analisará seu perfil e poderá entrar em contato pelo e-mail ou WhatsApp informados.</p>
+            </div>
+
+            <div class="form-erro" id="form-erro" style="display:none;">
+              <i class="fas fa-exclamation-circle"></i>
+              <p>
+                Ocorreu um erro ao enviar sua candidatura. Tente novamente em alguns instantes ou, se preferir,
+                fale com nosso time pelo WhatsApp <strong>+55 27 99980-6801</strong>.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">Dúvidas sobre oportunidades?</h2>
+        <p class="cta-text">
+          Fale com nosso time pelo WhatsApp ou envie um e-mail para atendimento@linhagro.com.br.
+        </p>
+        <div class="cta-buttons">
+          <a
+            href="https://wa.me/5527999806801?text=Ol%C3%A1!%20Tenho%20interesse%20em%20oportunidades%20na%20Linhagro"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-cta btn-primary"
+          >
+            <i class="fab fa-whatsapp"></i>
+            <span>Falar com RH</span>
+          </a>
+          <a href="mailto:atendimento@linhagro.com.br" class="btn-cta btn-secondary">
+            <i class="fas fa-envelope"></i>
+            <span>atendimento@linhagro.com.br</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- BOTÃO WHATSAPP FLUTUANTE COM BALÃO -->
+  <div class="whatsapp-floating">
+    <a
+      href="https://wa.me/5527999806801?text=Ol%C3%A1!%20Tenho%20interesse%20em%20oportunidades%20na%20Linhagro"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar com a Linhagro no WhatsApp"
+      class="whatsapp-floating-button"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="whatsapp-floating-message">
+      <span>Fale com um consultor</span>
+    </div>
+  </div>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner-container"></div>
+
+  <!-- SCRIPTS -->
+  <script src="../assets/components-loader.js"></script>
+  <script src="../assets/js/components/header.js"></script>
+  <script src="../assets/js/paginas/trabalhe_conosco.js"></script>
+
+  <!-- Carregar Cookie Banner -->
+  <script>
+    async function loadCookieBanner() {
+      try {
+        const response = await fetch('../assets/components/cookie-banner.html');
+        const html = await response.text();
+        document.getElementById('cookie-banner-container').innerHTML = html;
+
+        const script = document.createElement('script');
+        script.src = '../assets/js/cookie-consent.js';
+        document.body.appendChild(script);
+      } catch (error) {
+        console.error('Erro ao carregar cookie banner:', error);
+      }
+    }
+    loadCookieBanner();
+  </script>
+
+</body>
+</html>

@@ -1,11 +1,8 @@
 // ============================================
-// PÁGINA CONSULTORES COM MAPA INTERATIVO
+// PÁGINA CONSULTORES COM MAPA DE FILIAIS
 // ============================================
 
-console.log('🗺️ Mapa de Consultores iniciado');
-
 let mapa;
-let todosMarkers = [];
 
 // Aguarda o carregamento do header/footer
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,20 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initConsultores() {
-  console.log('✅ Inicializando consultores...');
-
   marcarNavAtivo();
   inicializarMapa();
-  renderizarConsultores('todos');
   setupFiltros();
   animarStats();
-
-  console.log('✅ Consultores carregado!');
+  initFloatingWhatsappMessage();
 }
 
-// ============================================
-// MARCA NAV-LINK ATIVO
-// ============================================
+// Marca nav-link ativo
 function marcarNavAtivo() {
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
@@ -38,294 +29,136 @@ function marcarNavAtivo() {
   });
 }
 
-// ============================================
-// BANCO DE DADOS - CONSULTORES
-// ============================================
-const consultores = [
-  // ESPÍRITO SANTO
+// Filiais com coordenadas
+const filiais = [
   {
-    id: 1,
-    nome: 'Carlos Silva',
-    especialidade: 'Café Premium',
-    estado: 'ES',
-    cidade: 'Vitória',
-    coordenadas: [-20.3155, -40.3128],
-    telefone: '(27) 99999-1111',
-    email: 'carlos@linhagro.com.br',
-    areas: ['Nutrição de Solo', 'Manejo de Pragas']
-  },
-  {
-    id: 2,
-    nome: 'Ana Paula Costa',
-    especialidade: 'Agricultura Orgânica',
-    estado: 'ES',
-    cidade: 'Cachoeiro de Itapemirim',
-    coordenadas: [-20.8489, -41.1129],
-    telefone: '(27) 99999-2222',
-    email: 'ana@linhagro.com.br',
-    areas: ['Certificação Orgânica', 'Solo Saudável']
-  },
-  {
-    id: 3,
-    nome: 'Roberto Mendes',
-    especialidade: 'Fruticultura',
-    estado: 'ES',
+    nome: 'LINHAGRO - MATRIZ',
     cidade: 'Linhares',
-    coordenadas: [-19.3914, -40.0719],
-    telefone: '(27) 99999-3333',
-    email: 'roberto@linhagro.com.br',
-    areas: ['Mamão', 'Coco', 'Maracujá']
-  },
-  {
-    id: 4,
-    nome: 'Juliana Rodrigues',
-    especialidade: 'Café e Grãos',
     estado: 'ES',
-    cidade: 'Venda Nova do Imigrante',
-    coordenadas: [-20.3311, -41.1331],
-    telefone: '(27) 99999-4444',
-    email: 'juliana@linhagro.com.br',
-    areas: ['Café Arábica', 'Milho', 'Feijão']
+    endereco: 'Rua Samuel Batista Cruz, 2959 - Nossa Senhora da Conceição',
+    coordenadas: [-19.383869647660646, -40.067497604698]
   },
   {
-    id: 5,
-    nome: 'Marcos Ferreira',
-    especialidade: 'Pastagens',
+    nome: 'LINHAGRO JAGUARÉ',
+    cidade: 'Jaguare',
     estado: 'ES',
-    cidade: 'São Mateus',
-    coordenadas: [-18.7153, -39.8586],
-    telefone: '(27) 99999-5555',
-    email: 'marcos@linhagro.com.br',
-    areas: ['Recuperação de Pastagens', 'Gado de Leite']
-  },
-
-  // BAHIA
-  {
-    id: 6,
-    nome: 'Patricia Santos',
-    especialidade: 'Cacau Premium',
-    estado: 'BA',
-    cidade: 'Ilhéus',
-    coordenadas: [-14.7890, -39.0480],
-    telefone: '(73) 99999-6666',
-    email: 'patricia@linhagro.com.br',
-    areas: ['Cacau Fino', 'Manejo Sustentável']
+    endereco: 'Rua Nove de Agosto, 2857 - Centro',
+    coordenadas: [-18.87084281652228, -40.08645601202899]
   },
   {
-    id: 7,
-    nome: 'Fernando Oliveira',
-    especialidade: 'Grãos',
-    estado: 'BA',
-    cidade: 'Barreiras',
-    coordenadas: [-12.1520, -44.9900],
-    telefone: '(77) 99999-7777',
-    email: 'fernando@linhagro.com.br',
-    areas: ['Soja', 'Milho', 'Algodão']
+    nome: 'LINHAGRO RIO BANANAL',
+    cidade: 'Rio Bananal',
+    estado: 'ES',
+    endereco: 'Rua Henrique Gaburro, 446 - Santo Antônio',
+    coordenadas: [-19.260898987755045, -40.3333937335372]
   },
   {
-    id: 8,
-    nome: 'Beatriz Lima',
-    especialidade: 'Fruticultura Irrigada',
+    nome: 'LINHAGRO TEIXEIRA DE FREITAS',
+    cidade: 'Teixeira de Freitas',
     estado: 'BA',
-    cidade: 'Juazeiro',
-    coordenadas: [-9.4111, -40.5025],
-    telefone: '(74) 99999-8888',
-    email: 'beatriz@linhagro.com.br',
-    areas: ['Uva', 'Manga', 'Goiaba']
-  },
-  {
-    id: 9,
-    nome: 'André Souza',
-    especialidade: 'Café Especial',
-    estado: 'BA',
-    cidade: 'Vitória da Conquista',
-    coordenadas: [-14.8615, -40.8442],
-    telefone: '(77) 99999-9999',
-    email: 'andre@linhagro.com.br',
-    areas: ['Café Especial', 'Pós-Colheita']
-  },
-  {
-    id: 10,
-    nome: 'Camila Alves',
-    especialidade: 'Horticultura',
-    estado: 'BA',
-    cidade: 'Feira de Santana',
-    coordenadas: [-12.2664, -38.9663],
-    telefone: '(75) 99999-0000',
-    email: 'camila@linhagro.com.br',
-    areas: ['Tomate', 'Pimentão', 'Alface']
+    endereco: 'Rua Santíssima Trindade, 22 - São José',
+    coordenadas: [-17.523468309809783, -39.710360862420465]
   }
 ];
 
-// ============================================
-// INICIALIZAR MAPA LEAFLET
-// ============================================
+// Inicializar mapa Leaflet
 function inicializarMapa() {
-  // Centro do mapa (entre ES e BA)
-  const centroMapa = [-17.5, -40.5];
+  const centroMapa = [-18.3, -40.1];
 
-  // Criar mapa
   mapa = L.map('mapa').setView(centroMapa, 7);
 
-  // Adicionar camada de tiles (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors',
     maxZoom: 18
   }).addTo(mapa);
 
-  // Adicionar marcadores
-  adicionarMarcadores('todos');
-
-  console.log('✅ Mapa inicializado');
+  adicionarMarcadoresFiliais('todos');
 }
 
-// ============================================
-// ADICIONAR MARCADORES NO MAPA
-// ============================================
-function adicionarMarcadores(estadoFiltro) {
-  // Limpar marcadores existentes
-  todosMarkers.forEach(marker => mapa.removeLayer(marker));
-  todosMarkers = [];
+// Adicionar marcadores de filiais (apenas logo PNG)
+function adicionarMarcadoresFiliais(estadoFiltro) {
+  // Limpa todas camadas exceto tile layer
+  mapa.eachLayer(layer => {
+    if (!(layer instanceof L.TileLayer)) {
+      mapa.removeLayer(layer);
+    }
+  });
 
-  // Filtrar consultores
-  const consultoresFiltrados = estadoFiltro === 'todos' 
-    ? consultores 
-    : consultores.filter(c => c.estado === estadoFiltro);
+  const filiaisFiltradas =
+    estadoFiltro === 'todos'
+      ? filiais
+      : filiais.filter(f => f.estado === estadoFiltro);
 
-  // Adicionar novos marcadores
-  consultoresFiltrados.forEach(consultor => {
-    // Ícone customizado
-    const iconeCor = consultor.estado === 'ES' ? '#0d5940' : '#F4A261';
-    const iconeCustom = L.divIcon({
-      html: '<div style="background: ' + iconeCor + '; width: 40px; height: 40px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">' + consultor.estado + '</div>',
-      className: 'custom-marker',
-      iconSize: [40, 40]
+  const markers = [];
+
+  filiaisFiltradas.forEach(filial => {
+    const iconeFilial = L.divIcon({
+      html:
+        '<div class="marker-filial">' +
+          '<img src="../assets/imagens/logo-white.png" alt="Linhagro">' +
+        '</div>',
+      className: 'custom-marker-filial',
+      iconSize: [50, 50],
+      iconAnchor: [25, 50]
     });
 
-    // Criar popup HTML
-    const popupHTML = '<div class="popup-consultor">' +
-      '<div class="popup-nome">' + consultor.nome + '</div>' +
-      '<div class="popup-especialidade">' + consultor.especialidade + '</div>' +
+    const popupHTML =
+      '<div class="popup-consultor">' +
+      '<div class="popup-nome">' + filial.nome + '</div>' +
       '<div class="popup-info">' +
-        '<span><i class="fas fa-map-marker-alt"></i> ' + consultor.cidade + ' - ' + consultor.estado + '</span>' +
-        '<span><i class="fas fa-phone"></i> ' + consultor.telefone + '</span>' +
-        '<span><i class="fas fa-envelope"></i> ' + consultor.email + '</span>' +
+      '<span><i class="fas fa-map-marker-alt"></i> ' + filial.endereco + '</span>' +
+      '<span><i class="fas fa-city"></i> ' + filial.cidade + ' - ' + filial.estado + '</span>' +
       '</div>' +
-      '<a href="https://wa.me/55' + consultor.telefone.replace(/\D/g, '') + '" target="_blank" class="popup-btn">' +
-        '<i class="fab fa-whatsapp"></i>' +
-        'Falar no WhatsApp' +
-      '</a>' +
-    '</div>';
+      '</div>';
 
-    // Criar marcador
-    const marker = L.marker(consultor.coordenadas, { icon: iconeCustom })
+    const marker = L.marker(filial.coordenadas, { icon: iconeFilial })
       .addTo(mapa)
       .bindPopup(popupHTML);
 
-    todosMarkers.push(marker);
+    markers.push(marker);
   });
 
-  // Ajustar zoom para mostrar todos os marcadores
-  if (todosMarkers.length > 0) {
-    const grupo = L.featureGroup(todosMarkers);
-    mapa.fitBounds(grupo.getBounds().pad(0.1));
+  if (markers.length > 0) {
+    const grupo = L.featureGroup(markers);
+    mapa.fitBounds(grupo.getBounds().pad(0.2));
   }
 }
 
-// ============================================
-// RENDERIZAR CONSULTORES (CARDS)
-// ============================================
-function renderizarConsultores(estadoFiltro) {
-  const grid = document.getElementById('consultores-grid');
-  if (!grid) return;
-
-  const consultoresFiltrados = estadoFiltro === 'todos' 
-    ? consultores 
-    : consultores.filter(c => c.estado === estadoFiltro);
-
-  grid.innerHTML = consultoresFiltrados.map(c => {
-    return '<article class="consultor-card">' +
-      '<div class="consultor-header">' +
-        '<div class="consultor-avatar">' +
-          '<i class="fas fa-user"></i>' +
-        '</div>' +
-        '<h3 class="consultor-nome">' + c.nome + '</h3>' +
-        '<span class="consultor-especialidade">' + c.especialidade + '</span>' +
-      '</div>' +
-      '<div class="consultor-corpo">' +
-        '<div class="consultor-info">' +
-          '<div class="info-item">' +
-            '<i class="fas fa-map-marker-alt"></i>' +
-            '<span>' + c.cidade + ' - ' + c.estado + '</span>' +
-          '</div>' +
-          '<div class="info-item">' +
-            '<i class="fas fa-phone"></i>' +
-            '<span>' + c.telefone + '</span>' +
-          '</div>' +
-          '<div class="info-item">' +
-            '<i class="fas fa-envelope"></i>' +
-            '<span>' + c.email + '</span>' +
-          '</div>' +
-          '<div class="info-item">' +
-            '<i class="fas fa-briefcase"></i>' +
-            '<span>' + c.areas.join(', ') + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<a href="https://wa.me/55' + c.telefone.replace(/\D/g, '') + '" target="_blank" rel="noopener noreferrer" class="consultor-btn">' +
-          '<i class="fab fa-whatsapp"></i>' +
-          'Falar no WhatsApp' +
-        '</a>' +
-      '</div>' +
-    '</article>';
-  }).join('');
-}
-
-// ============================================
-// SETUP FILTROS
-// ============================================
+// Filtros (filtram as filiais por estado)
 function setupFiltros() {
   const filtros = document.querySelectorAll('.filtro-btn');
 
   filtros.forEach(filtro => {
     filtro.addEventListener('click', () => {
-      // Remove active de todos
       filtros.forEach(f => f.classList.remove('active'));
-
-      // Adiciona active no clicado
       filtro.classList.add('active');
 
-      // Aplica filtro
       const estado = filtro.dataset.estado;
-      adicionarMarcadores(estado);
-      renderizarConsultores(estado);
-
-      console.log('🔍 Filtro aplicado: ' + estado);
+      adicionarMarcadoresFiliais(estado);
     });
   });
 }
 
-// ============================================
-// ANIMAR ESTATÍSTICAS
-// ============================================
+// Animar estatísticas
 function animarStats() {
   const stats = document.querySelectorAll('.stat-numero');
 
-  // Intersection Observer para animar quando entrar na tela
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const stat = entry.target;
-        const target = parseInt(stat.dataset.target);
+        const target = parseInt(stat.dataset.target, 10);
+        const sufixo = stat.dataset.sufixo || '';
         let current = 0;
         const increment = target / 50;
 
         const timer = setInterval(() => {
           current += increment;
           if (current >= target) {
-            stat.textContent = target + (target === 98 ? '%' : '+');
+            stat.textContent = target + sufixo;
             clearInterval(timer);
           } else {
-            stat.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
+            stat.textContent = Math.floor(current) + sufixo;
           }
         }, 30);
 
@@ -335,4 +168,36 @@ function animarStats() {
   });
 
   stats.forEach(stat => observer.observe(stat));
+}
+
+// WhatsApp floating message (balão rotativo)
+function initFloatingWhatsappMessage() {
+  const messageEl = document.querySelector('.whatsapp-floating-message');
+  if (!messageEl) return;
+
+  const mensagens = [
+    'Fale com um consultor<br>da sua região',
+    'Clique aqui e fale<br>com a Linhagro',
+    'Envie suas dúvidas<br>pelo WhatsApp',
+    'Vamos construir juntos<br>sua estratégia no campo'
+  ];
+
+  let idx = 0;
+
+  function mostrarMensagem() {
+    const span = messageEl.querySelector('span');
+    if (!span) return;
+
+    span.innerHTML = mensagens[idx];
+    messageEl.classList.add('visible');
+
+    setTimeout(() => {
+      messageEl.classList.remove('visible');
+    }, 2500);
+
+    idx = (idx + 1) % mensagens.length;
+  }
+
+  setTimeout(mostrarMensagem, 3000);
+  setInterval(mostrarMensagem, 6000);
 }

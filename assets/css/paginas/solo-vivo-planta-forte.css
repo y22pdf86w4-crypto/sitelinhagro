@@ -1,134 +1,193 @@
+/* ========= BASE ========= */
+
 .solo-page {
   background: #f8f9fa;
   min-height: 100vh;
   color: #1f2933;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: relative;
 }
 
-/* HERO */
+/* ========= FOLHAS GENÉRICAS ========= */
+
+.folha {
+  position: absolute;
+  background-image: url("../../imagens/solo vivo/folha.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.22;
+  z-index: 0;
+}
+
+.folha-bg-1 {
+  top: 140px;
+  left: -90px;
+  width: 260px;
+  height: 260px;
+  transform: rotate(-12deg);
+  opacity: 0.18;
+}
+
+.folha-bg-2 {
+  bottom: 80px;
+  right: -110px;
+  width: 280px;
+  height: 280px;
+  transform: rotate(18deg);
+  opacity: 0.18;
+}
+
+.solo-summary {
+  position: relative;
+}
+
+.solo-summary-content {
+  position: relative;
+}
+
+.folha-summary-1 {
+  top: -10px;
+  right: -60px;
+  width: 140px;
+  height: 140px;
+  transform: rotate(-20deg);
+}
+
+.solo-pillars {
+  position: relative;
+}
+
+.solo-pillars-container {
+  position: relative;
+}
+
+.folha-pillars-1 {
+  top: -20px;
+  left: -70px;
+  width: 130px;
+  height: 130px;
+  transform: rotate(15deg);
+}
+
+.solo-benefits {
+  position: relative;
+}
+
+.solo-benefits-container {
+  position: relative;
+}
+
+.folha-benefits-1 {
+  top: 40px;
+  right: -80px;
+  width: 150px;
+  height: 150px;
+  transform: rotate(-25deg);
+}
+
+.cta-section {
+  position: relative;
+}
+
+.cta-container {
+  position: relative;
+}
+
+.folha-cta-1 {
+  top: -30px;
+  left: -70px;
+  width: 130px;
+  height: 130px;
+  transform: rotate(22deg);
+  opacity: 0.2;
+}
+
+/* ========= HERO ========= */
 
 .solo-hero {
   position: relative;
-  padding: 6rem 1.5rem 5rem;
-  background: linear-gradient(135deg, #29401a 0%, #2D5016 40%, #111827 100%);
-  color: #ffffff;
+  min-height: 420px;
+  padding: 0;
   overflow: hidden;
+
+  background-image: url("../../imagens/solo vivo/logo-solo-vivo-planta-forte.png");
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .solo-hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at top left, rgba(255, 154, 60, 0.25) 0, transparent 50%),
-    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.18) 0, transparent 55%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
   pointer-events: none;
 }
 
-.solo-hero .container {
-  position: relative;
+/* ========= CONTAINERS – todos alinhados igual ========= */
+
+.solo-summary .container,
+.solo-pillars .container,
+.solo-benefits .container,
+.cta-section .container {
   max-width: 1120px;
   margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-.solo-hero-content {
-  max-width: 650px;
+/* ========= RESUMO ========= */
+
+.solo-summary {
+  padding: 3rem 0;
+  background: #ffffff;
+  margin-top: 0;
+}
+
+.solo-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: left;
+  width: 100%;
+}
+
+.solo-summary-content {
   position: relative;
-  z-index: 1;
-}
-
-.solo-hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 1rem;
-}
-
-.solo-hero-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
-  line-height: 1.2;
-  font-weight: 800;
-  margin-bottom: 1rem;
-}
-
-.solo-hero-subtitle {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  max-width: 580px;
-  opacity: 0.96;
-  margin-bottom: 2rem;
-}
-
-.solo-hero-buttons {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
-/* BOTÕES REAPROVEITANDO CTA GLOBAL */
+.solo-summary-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1f2933;
+  margin-bottom: 0.25rem;
+}
 
-.btn-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.9rem 1.8rem;
-  border-radius: 8px;
-  font-weight: 600;
+.solo-summary-text {
   font-size: 0.98rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  cursor: pointer;
+  line-height: 1.7;
+  color: #374151;
 }
 
-.btn-cta i {
-  font-size: 1.1rem;
-}
-
-.btn-primary {
-  background: #ff5500;
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.45);
-}
-
-.btn-primary:hover {
-  background: #e24c00;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(255, 85, 0, 0.55);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.6);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* PILARES */
+/* ========= PILARES ========= */
 
 .solo-pillars {
-  padding: 4rem 1.5rem;
+  padding: 3rem 0 4rem;
   background: #ffffff;
 }
 
-.solo-pillars .container {
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
 .section-header {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto 2.5rem;
+  text-align: left;
+  max-width: 100%;
+  margin: 0 0 2.5rem;
 }
 
 .section-title {
@@ -137,6 +196,7 @@
   font-weight: 800;
   color: #1f2933;
   margin-bottom: 0.75rem;
+  line-height: 1.25;
 }
 
 .section-subtitle {
@@ -147,8 +207,9 @@
 
 .solo-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.75rem;
+  text-align: left;
 }
 
 .solo-pillar-card {
@@ -178,35 +239,36 @@
 
 .solo-pillar-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
   margin-bottom: 0.5rem;
 }
 
 .solo-pillar-text {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: #4b5563;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
-/* BENEFÍCIOS */
+/* ========= BENEFÍCIOS ========= */
 
 .solo-benefits {
-  padding: 4rem 1.5rem;
+  padding: 4rem 0;
   background: #f3f4f6;
-}
-
-.solo-benefits .container {
-  max-width: 1120px;
-  margin: 0 auto;
 }
 
 .solo-benefits-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 2.5rem;
-  align-items: stretch;
+  grid-template-columns: 1.4fr 1fr; /* esquerda maior, direita menor */
+  gap: 3rem;
+  align-items: start;
+}
+
+.solo-benefits-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .solo-benefits-left .section-title {
@@ -214,8 +276,11 @@
 }
 
 .solo-benefits-left .section-subtitle {
+  font-size: 1rem;
+  color: #5a6c7d;
+  line-height: 1.6;
   text-align: left;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .solo-benefits-list {
@@ -237,43 +302,50 @@
 
 .solo-benefits-list i {
   color: #16a34a;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.solo-benefits-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 100%; /* deixa usar toda a coluna */
 }
 
 .solo-highlight-card {
   background: linear-gradient(135deg, #111827 0%, #1f2937 60%, #4b5563 100%);
   color: #f9fafb;
   border-radius: 16px;
-  padding: 2rem;
+  padding: 2.5rem 1.75rem; /* mais padding vertical para crescer */
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .solo-highlight-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.15rem;      /* um pouco menor para caber menos por linha */
   font-weight: 800;
-  margin-bottom: 1rem;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
 }
 
 .solo-highlight-text {
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 0.92rem;      /* menor para forçar mais quebras */
+  line-height: 1.75;       /* mais espaçado verticalmente */
   opacity: 0.96;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
 }
 
-/* CTA FINAL */
+/* ========= CTA FINAL ========= */
 
 .cta-section {
-  padding: 4rem 2rem;
+  padding: 4rem 0;
   background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   text-align: center;
   color: white;
-}
-
-.cta-section .container {
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 .cta-title {
@@ -298,7 +370,7 @@
   margin-top: 1.8rem;
 }
 
-/* WHATSAPP FLUTUANTE (reuso do estilo que você já tem) */
+/* ========= WHATSAPP FLUTUANTE ========= */
 
 .whatsapp-floating {
   position: fixed;
@@ -346,7 +418,6 @@
   border: 1px solid rgba(0, 0, 0, 0.03);
   text-align: left;
   word-break: break-word;
-
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
@@ -363,29 +434,33 @@
   pointer-events: auto;
 }
 
-/* RESPONSIVO */
+/* ========= RESPONSIVO ========= */
+
+@media (max-width: 1024px) {
+  .solo-pillars-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 @media (max-width: 900px) {
   .solo-benefits-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .solo-hero {
-    padding: 5rem 1.25rem 4rem;
-  }
-
-  .solo-hero-title {
-    font-size: 2rem;
-  }
-
-  .solo-hero-subtitle {
-    font-size: 0.98rem;
+    min-height: 360px;
+    background-position: center top;
   }
 
   .section-title {
     font-size: 1.6rem;
+  }
+
+  .solo-summary-title {
+    font-size: 1.7rem;
   }
 
   .cta-title {
@@ -397,20 +472,20 @@
     align-items: center;
   }
 
-  .btn-cta {
+  .cta-buttons .btn-cta {
     width: 100%;
     max-width: 300px;
     justify-content: center;
+  }
+
+  .solo-pillars-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
   .solo-hero {
-    padding: 4rem 1rem 3rem;
-  }
-
-  .solo-hero-title {
-    font-size: 1.7rem;
+    min-height: 320px;
   }
 
   .whatsapp-floating-message {

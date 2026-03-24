@@ -72,6 +72,9 @@ function animarEstatisticas() {
 // ============================================
 // DEPOIMENTOS EM VÍDEO - DADOS
 // ============================================
+
+const CAMINHO_CAPAS = '../assets/imagens/resultados/capavideos/';
+
 const videoDepoimentos = [
   {
     nome: 'Vanderlei Ceolin',
@@ -79,7 +82,8 @@ const videoDepoimentos = [
     quote: '“Depoimento em vídeo sobre a evolução da lavoura com o manejo Linhagro.”',
     cultura: 'Produtor de Café',
     local: 'Espírito Santo',
-    driveId: '1RJgQl09snW7thTE1dV2RhW7i0AS-oPS2'
+    driveId: '1RJgQl09snW7thTE1dV2RhW7i0AS-oPS2',
+    capa: 'VANDERLEI-CEOLIN.png'
   },
   {
     nome: 'Jardeson - JMF',
@@ -87,15 +91,17 @@ const videoDepoimentos = [
     quote: '“Relato em vídeo de ganhos de produtividade com nutrição estratégica.”',
     cultura: 'Produtor Rural',
     local: 'Espírito Santo',
-    driveId: '1AKPvcRSYpgIl4HXNE94Z9pQWOVYGYBfU'
+    driveId: '1AKPvcRSYpgIl4HXNE94Z9pQWOVYGYBfU',
+    capa: 'JARDESON---JMF.png'
   },
   {
-    nome: 'Jarbas',
+    nome: 'Jarbas Nicoli',
     inicial: 'J',
     quote: '“Mostra como o solo vivo e bem nutrido mudou o desempenho da área.”',
     cultura: 'Produtor Rural',
     local: 'Espírito Santo',
-    driveId: '1RxUJA_gmv1cDCaanwLBj_YAtn_MERX9U'
+    driveId: '1RxUJA_gmv1cDCaanwLBj_YAtn_MERX9U',
+    capa: 'JARBAS-NICOLI--.png' // ajuste aqui se o nome for diferente
   },
   {
     nome: 'Guto',
@@ -103,7 +109,8 @@ const videoDepoimentos = [
     quote: '“Depoimento sobre adoção de soluções biológicas e manejo regenerativo.”',
     cultura: 'Produtor Rural',
     local: 'Espírito Santo',
-    driveId: '1gQCvNSwtVM_6cC8BC-dXOJfxiwFbjV9k'
+    driveId: '1gQCvNSwtVM_6cC8BC-dXOJfxiwFbjV9k',
+    capa: 'GUTO.png'
   },
   {
     nome: 'Eduardo Bortolini',
@@ -111,23 +118,26 @@ const videoDepoimentos = [
     quote: '“Evolução de produtividade e mais estabilidade de safra com a Linhagro.”',
     cultura: 'Produtor Rural',
     local: 'Espírito Santo',
-    driveId: '15iwE6SRiZ5MdGDnqfET6r34aUEqMO6LA'
+    driveId: '15iwE6SRiZ5MdGDnqfET6r34aUEqMO6LA',
+    capa: 'EDUARDO-BORTOLINI--.png'
   },
   {
-    nome: 'Almir Gauburro',
+    nome: 'Almir Gaburro - Café Esperanza',
     inicial: 'A',
     quote: '“Relato em vídeo sobre recuperação de áreas e construção de fertilidade.”',
     cultura: 'Produtor Rural',
     local: 'Espírito Santo',
-    driveId: '1ATPtsblBgY_jxM1IqKuyvt8qUpKAYGaC'
+    driveId: '1ATPtsblBgY_jxM1IqKuyvt8qUpKAYGaC',
+    capa: 'ALMIR-GABURRO---CAFÉ-ESPERANZA.png'
   },
   {
-    nome: 'Aline Malta - Três Marias',
+    nome: 'Aline Malta - Fazenda Três Marias',
     inicial: 'A',
     quote: '“Depoimento sobre salto de resultado com manejo regenerativo.”',
     cultura: 'Produtora Rural',
     local: 'Espírito Santo',
-    driveId: '1WKgaxL1l-2W8ACAJThH5onImhlEEpxSk'
+    driveId: '1WKgaxL1l-2W8ACAJThH5onImhlEEpxSk',
+    capa: 'ALINE-MALTA---FAZENDA-TRES-MARIAS.png'
   }
 ];
 
@@ -147,13 +157,22 @@ function renderizarVideoDepoimentos() {
       (v, index) => `
       <article class="video-testimonial-card">
         <div class="video-wrapper" data-video-index="${index}">
-          <div class="video-placeholder">
-            <div class="video-placeholder-icon">
+          <img
+            class="video-cover"
+            src="${CAMINHO_CAPAS + v.capa}"
+            alt="Capa do depoimento de ${v.nome}"
+            loading="lazy"
+          />
+          <div class="video-overlay-play">
+            <div class="video-overlay-play-icon">
               <i class="fas fa-play-circle"></i>
             </div>
-            <div class="video-placeholder-text">
+            <div class="video-overlay-play-text">
               Clique para assistir ao depoimento
             </div>
+          </div>
+          <div class="video-loader">
+            <div class="video-loader-spinner"></div>
           </div>
         </div>
         <div class="video-info">
@@ -180,7 +199,7 @@ function renderizarVideoDepoimentos() {
 }
 
 // ============================================
-// LAZY LOAD DOS IFRAMES (Google Drive)
+// LAZY LOAD DOS IFRAMES + LOADING
 // ============================================
 function initLazyLoadVideos() {
   const wrappers = document.querySelectorAll('.video-wrapper');
@@ -188,26 +207,28 @@ function initLazyLoadVideos() {
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
       const wrapper = entry.target;
       const index = parseInt(wrapper.getAttribute('data-video-index'), 10);
       const data = videoDepoimentos[index];
+
       if (!data) {
         obs.unobserve(wrapper);
         return;
       }
 
-      const iframe = document.createElement('iframe');
-      iframe.src = getDrivePreviewUrl(data.driveId);
-      iframe.allow =
-        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-      iframe.loading = 'lazy';
+      // Só adiciona o listener de clique uma vez
+      if (!wrapper.dataset.clickBound) {
+        wrapper.addEventListener('click', () => {
+          carregarIframeNoWrapper(wrapper, data);
+        });
+        wrapper.dataset.clickBound = 'true';
+      }
 
-      wrapper.innerHTML = '';
-      wrapper.appendChild(iframe);
+      // Se quiser que ele já carregue sozinho ao entrar na tela SEM clicar,
+      // descomente a linha abaixo:
+      // carregarIframeNoWrapper(wrapper, data);
 
+      // uma vez que o elemento entrou na tela, não precisa mais observar
       obs.unobserve(wrapper);
     });
   }, { threshold: 0.3 });
@@ -215,11 +236,35 @@ function initLazyLoadVideos() {
   wrappers.forEach(w => observer.observe(w));
 }
 
-/**
- * ==========================================
- * WHATSAPP FLUTUANTE - BALÃO ALTERNANDO
- * ==========================================
- */
+function carregarIframeNoWrapper(wrapper, data) {
+  // se já tiver iframe, não faz nada
+  if (wrapper.querySelector('iframe')) return;
+
+  const loader = wrapper.querySelector('.video-loader');
+  const overlayPlay = wrapper.querySelector('.video-overlay-play');
+  const cover = wrapper.querySelector('.video-cover');
+
+  if (loader) loader.classList.add('visible');
+
+  const iframe = document.createElement('iframe');
+  iframe.src = getDrivePreviewUrl(data.driveId);
+  iframe.allow =
+    'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.loading = 'lazy';
+
+  iframe.addEventListener('load', () => {
+    if (loader) loader.classList.remove('visible');
+    if (overlayPlay) overlayPlay.style.display = 'none';
+    if (cover) cover.style.display = 'none';
+  });
+
+  wrapper.appendChild(iframe);
+}
+
+// ============================================
+// WHATSAPP FLUTUANTE - BALÃO ALTERNANDO
+// ============================================
 function initFloatingWhatsappMessage() {
   const messageEl = document.querySelector('.whatsapp-floating-message');
   if (!messageEl) return;

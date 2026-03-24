@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portal do Cliente Linhagro - Acompanhe novidades, projetos, eventos e conteúdos exclusivos.">
+  <meta name="description" content="Portal do Cliente Linhagro - Projetos especiais como OnFirm e Solo Vivo, Planta Forte.">
 
   <title>Portal do Cliente - Linhagro</title>
 
@@ -39,71 +39,124 @@
     <section class="hero-page">
       <div class="container">
         <div class="hero-content">
-          <div class="hero-badge">
-            <i class="fas fa-star"></i>
-            <span>Portal Exclusivo</span>
-          </div>
           <h1 class="page-title">Portal do Cliente</h1>
-          <p class="page-subtitle">Acompanhe novidades, projetos, eventos e conteúdos exclusivos da Linhagro</p>
+          <p class="page-subtitle">
+            Acesse projetos especiais da Linhagro e conteúdos pensados para quem vive o campo todos os dias.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Filtros -->
-    <section class="filtros-section">
-      <div class="container">
-        <div class="filtros-wrapper">
-          <button class="filtro-btn active" data-categoria="todos">
-            <i class="fas fa-th"></i>
-            <span>Todos</span>
-          </button>
-          <button class="filtro-btn" data-categoria="novidades">
-            <i class="fas fa-newspaper"></i>
-            <span>Novidades</span>
-          </button>
-          <button class="filtro-btn" data-categoria="projetos">
-            <i class="fas fa-project-diagram"></i>
-            <span>Projetos</span>
-          </button>
-          <button class="filtro-btn" data-categoria="eventos">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Eventos</span>
-          </button>
-          <button class="filtro-btn" data-categoria="conteudos">
-            <i class="fas fa-book"></i>
-            <span>Conteúdos</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Grid de Conteúdo -->
+    <!-- Projetos em Destaque -->
     <section class="conteudo-section">
       <div class="container">
-        <div class="conteudo-grid" id="conteudo-grid"></div>
 
-        <!-- Mensagem quando não há resultados -->
-        <div class="sem-resultados" id="sem-resultados" style="display: none;">
+        <div class="section-header center">
+          <h2 class="section-title">Projetos em Destaque</h2>
+          <p class="section-subtitle">
+            Conheça o OnFirm e o Solo Vivo, Planta Forte.
+          </p>
+        </div>
+
+        <!-- Campo de busca -->
+        <div class="busca-wrapper">
+          <div class="busca-input-group">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              id="busca-programas"
+              placeholder="Buscar programas por nome ou descrição..."
+            />
+          </div>
+        </div>
+
+        <div class="conteudo-grid" id="conteudo-grid">
+
+          <!-- CARD ONFIRM -->
+          <article class="conteudo-card" data-programa="onfirm">
+            <div class="conteudo-imagem">
+              <img
+                class="conteudo-imagem-img"
+                src="../assets/imagens/portal/programas/onfirm.png"
+                alt="Programa OnFirm"
+                loading="lazy"
+              />
+              <span class="conteudo-categoria categoria-destaque">
+                Projeto Especial
+              </span>
+              <span class="conteudo-data">
+                <i class="far fa-calendar"></i>
+                2026
+              </span>
+            </div>
+            <div class="conteudo-corpo">
+              <h3 class="conteudo-titulo">OnFirm</h3>
+              <p class="conteudo-descricao">
+                Projeto focado em gestão e estabilidade da produção, unindo tecnologia,
+                diagnóstico e acompanhamento técnico contínuo ao longo da safra.
+              </p>
+              <div class="conteudo-rodape">
+                <div class="conteudo-autor">
+                  <div class="autor-avatar">T</div>
+                  <span>Time Linhagro</span>
+                </div>
+                <a href="onfirme.html" class="conteudo-btn">
+                  Saiba mais
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD SOLO VIVO, PLANTA FORTE -->
+          <article class="conteudo-card" data-programa="solo-vivo">
+            <div class="conteudo-imagem">
+              <img
+                class="conteudo-imagem-img"
+                src="../assets/imagens/portal/programas/solovivo.png"
+                alt="Programa Solo Vivo, Planta Forte"
+                loading="lazy"
+              />
+              <span class="conteudo-categoria categoria-destaque">
+                Programa Solo
+              </span>
+              <span class="conteudo-data">
+                <i class="far fa-calendar"></i>
+                2026
+              </span>
+            </div>
+            <div class="conteudo-corpo">
+              <h3 class="conteudo-titulo">Solo Vivo, Planta Forte</h3>
+              <p class="conteudo-descricao">
+                Programa voltado para construção de solo vivo, manejo regenerativo
+                e plantas mais equilibradas e produtivas, safra após safra.
+              </p>
+              <div class="conteudo-rodape">
+                <div class="conteudo-autor">
+                  <div class="autor-avatar">E</div>
+                  <span>Equipe Técnica</span>
+                </div>
+                <a href="solo-vivo-planta-forte.html" class="conteudo-btn">
+                  Saiba mais
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- mensagem quando não encontrar nada -->
+        <div class="sem-programas" id="sem-programas" style="display:none;">
           <i class="fas fa-search"></i>
-          <h3>Nenhum resultado encontrado</h3>
-          <p>Tente selecionar outra categoria</p>
+          <h3>Nenhum programa encontrado</h3>
+          <p>Tente outro termo de busca.</p>
         </div>
+
       </div>
     </section>
 
-    <!-- Próximos Eventos -->
-    <section class="proximos-eventos">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Próximos Eventos</h2>
-          <p class="section-subtitle">Participe dos nossos eventos e capacitações</p>
-        </div>
-
-        <div class="eventos-timeline" id="eventos-timeline"></div>
-      </div>
-    </section>
-
-    <!-- Newsletter -->
+    <!-- Newsletter (temporariamente desativada)
     <section class="newsletter-section">
       <div class="container">
         <div class="newsletter-card">
@@ -112,7 +165,9 @@
           </div>
           <div class="newsletter-content">
             <h3 class="newsletter-title">Fique por dentro!</h3>
-            <p class="newsletter-text">Receba novidades, dicas e conteúdos exclusivos direto no seu e-mail</p>
+            <p class="newsletter-text">
+              Receba novidades, dicas e conteúdos exclusivos direto no seu e-mail.
+            </p>
           </div>
           <div class="newsletter-form">
             <input type="email" placeholder="Seu melhor e-mail" class="newsletter-input" id="newsletter-email">
@@ -124,20 +179,22 @@
         </div>
       </div>
     </section>
+    -->
 
     <!-- CTA -->
     <section class="cta-section">
       <div class="container">
         <h2 class="cta-title">Precisa de Ajuda?</h2>
-        <p class="cta-text">Nossa equipe está pronta para atender você</p>
+        <p class="cta-text">Nossa equipe está pronta para atender você.</p>
         <div class="cta-buttons">
-          <a href="https://wa.me/5527996514725?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20produtos%20Linhagro" target="_blank" rel="noopener noreferrer" class="btn-cta btn-primary">
+          <a href="https://wa.me/5527999806801?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20Linhagro"
+             target="_blank" rel="noopener noreferrer" class="btn-cta btn-primary">
             <i class="fab fa-whatsapp"></i>
             <span>Falar com Consultor</span>
           </a>
-          <a href="mailto:contato@linhagro.com.br" class="btn-cta btn-secondary">
+          <a href="mailto:atendimento@linhagro.com.br" class="btn-cta btn-secondary">
             <i class="fas fa-envelope"></i>
-            <span>Enviar E-mail</span>
+            <span>atendimento@linhagro.com.br</span>
           </a>
         </div>
       </div>
@@ -148,13 +205,112 @@
   <!-- FOOTER -->
   <div id="footer-container"></div>
 
+  <!-- BOTÃO WHATSAPP FLUTUANTE COM BALÃO -->
+  <div class="whatsapp-floating">
+    <a
+      href="https://wa.me/5527999806801?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20um%20consultor%20Linhagro."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar com a Linhagro no WhatsApp"
+      class="whatsapp-floating-button"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="whatsapp-floating-message">
+      <span>Fale com um consultor</span>
+    </div>
+  </div>
+
   <!-- COOKIE BANNER -->
   <div id="cookie-banner-container"></div>
 
   <!-- SCRIPTS -->
   <script src="../assets/components-loader.js"></script>
   <script src="../assets/js/components/header.js"></script>
-  <script src="../assets/js/paginas/portal.js"></script>
+
+  <script>
+    // Marca nav ativo
+    function marcarNavAtivo() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        if (link.classList.contains('btn-portal')) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Busca de programas
+    function setupBuscaProgramas() {
+      const input = document.getElementById('busca-programas');
+      const grid = document.getElementById('conteudo-grid');
+      const msgSem = document.getElementById('sem-programas');
+      if (!input || !grid) return;
+
+      input.addEventListener('input', () => {
+        const termo = input.value.toLowerCase().trim();
+        const cards = grid.querySelectorAll('.conteudo-card');
+        let visiveis = 0;
+
+        cards.forEach(card => {
+          const titulo = card.querySelector('.conteudo-titulo')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('.conteudo-descricao')?.textContent.toLowerCase() || '';
+          const texto = `${titulo} ${desc}`;
+
+          if (!termo || texto.includes(termo)) {
+            card.style.display = 'flex';
+            visiveis++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (visiveis === 0) {
+          msgSem.style.display = 'block';
+        } else {
+          msgSem.style.display = 'none';
+        }
+      });
+    }
+
+    // WhatsApp floating message
+    function initFloatingWhatsappMessage() {
+      const messageEl = document.querySelector('.whatsapp-floating-message');
+      if (!messageEl) return;
+
+      const mensagens = [
+        'Fale com um consultor<br>especialista Linhagro',
+        'Quer tirar dúvidas sobre<br>OnFirm ou Solo Vivo?',
+        'Clique aqui e<br>fale pelo WhatsApp',
+        'Nosso time técnico<br>está online agora'
+      ];
+
+      let idx = 0;
+
+      function mostrarMensagem() {
+        const span = messageEl.querySelector('span');
+        if (!span) return;
+
+        span.innerHTML = mensagens[idx];
+        messageEl.classList.add('visible');
+
+        setTimeout(() => {
+          messageEl.classList.remove('visible');
+        }, 2500);
+
+        idx = (idx + 1) % mensagens.length;
+      }
+
+      setTimeout(mostrarMensagem, 3000);
+      setInterval(mostrarMensagem, 6000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      marcarNavAtivo();
+      setupBuscaProgramas();
+      initFloatingWhatsappMessage();
+    });
+  </script>
 
   <!-- Carregar Cookie Banner -->
   <script>
@@ -171,7 +327,6 @@
         console.error('Erro ao carregar cookie banner:', error);
       }
     }
-
     loadCookieBanner();
   </script>
 

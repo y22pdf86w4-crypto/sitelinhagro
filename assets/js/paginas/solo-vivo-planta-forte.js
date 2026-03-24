@@ -1,4 +1,4 @@
-// PÁGINA SOLO VIVO, PLANTA FORTE
+// Página Solo Vivo, Planta Forte
 
 document.addEventListener('componentsLoaded', () => {
   marcarNavSoloVivo();
@@ -14,7 +14,6 @@ function marcarNavSoloVivo() {
   });
 }
 
-// Reuso da lógica de balão do WhatsApp
 function initFloatingWhatsappMessageSolo() {
   const messageEl = document.querySelector('.whatsapp-floating-message');
   if (!messageEl) return;
